@@ -118,9 +118,6 @@ alias torr="/mnt/d/_torrents"
 alias 720="yt-dlp -f 'best[height=720]' "
 
 
-alias ndp="netlify deploy --prod"
-alias ndb="netlify deploy --build --context production --prod"
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -150,7 +147,7 @@ alias ndb="netlify deploy --build --context production --prod"
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # The next line updates PATH for Netlify's Git Credential Helper.
-test -f '/home/bronze/.config/netlify/helper/path.zsh.inc' && source '/home/bronze/.config/netlify/helper/path.zsh.inc'
+# test -f '/home/bronze/.config/netlify/helper/path.zsh.inc' && source '/home/bronze/.config/netlify/helper/path.zsh.inc'
 
 # pnpm
 export PNPM_HOME="/home/bronze/.local/share/pnpm"
@@ -159,6 +156,7 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
 export PATH="/usr/local/bin:$PATH"
 export PATH="/home/bronze/.local/bin:$PATH"
 eval "$(zoxide init --cmd cd zsh)"
@@ -172,7 +170,10 @@ eval "$(zoxide init --cmd cd zsh)"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# https://console-ninja.com/
 PATH=~/.console-ninja/.bin:$PATH
 
 # Turn off annoying BEEP on autocomplete
 setopt NO_BEEP
+# Go straight to folder names
+setopt auto_cd
