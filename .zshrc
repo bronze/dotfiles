@@ -63,3 +63,5 @@ PATH=~/.console-ninja/.bin:$PATH
 setopt NO_BEEP
 # Go straight to folder names
 setopt auto_cd
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
