@@ -6,6 +6,23 @@ This directory contains the dotfiles for my system
 
 Ensure you have the following installed on your system
 
+### OhMyZsh
+
+https://gist.github.com/onlurking/a9537a57600486e6f7408e73f985f4ec
+
+https://dev.to/abdfnx/oh-my-zsh-powerlevel10k-cool-terminal-1no0
+
+https://medium.com/@satriajanaka09/setup-zsh-oh-my-zsh-powerlevel10k-on-ubuntu-20-04-c4a4052508fd
+
+### zsh-completions
+
+https://github.com/zsh-users/zsh-completions
+
+```
+git clone https://github.com/zsh-users/zsh-completions.git \
+ ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
+```
+
 ### Git
 
 ```
