@@ -64,8 +64,10 @@ then use GNU stow to create symlinks
 $ stow .
 ```
 
-## Reference
+## References
 
-https://youtu.be/y6XCebnB9gs
+This Zsh config is perhaps my favorite one yet.: https://youtu.be/ud7YxC33Z3w
+
+Stow has forever changed the way I manage my dotfiles: https://youtu.be/y6XCebnB9gs
 
 https://github.com/dreamsofautonomy/dotfiles
