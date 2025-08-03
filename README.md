@@ -71,3 +71,9 @@ This Zsh config is perhaps my favorite one yet.: https://youtu.be/ud7YxC33Z3w
 Stow has forever changed the way I manage my dotfiles: https://youtu.be/y6XCebnB9gs
 
 https://github.com/dreamsofautonomy/dotfiles
+
+Level up the look of your terminal with Oh-My-Posh: https://youtu.be/nGHgyPLi7UM
+
+How to Customize WSL & CMD in Windows Terminal with Oh My Posh!: https://youtu.be/lxNLJsDKyU4
+
+Make WSL/Ubuntu Terminal Look Better | Oh My Posh Guide: https://youtu.be/2LEnBXH8xV0
