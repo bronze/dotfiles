@@ -63,3 +63,16 @@ $env.config.buffer_editor = "code"$env.config.buffer_editor
 $env.config.buffer_editor = "code"
 $env.config.buffer_editor
 atuin init nu | save -f ~/.config/nushell/atuin.nu
+oh-my-posh init nu --config ~/.poshthemes/tonybaloney.nord.omp.json | save -f ~/.config/nushell/omp.nu
+ls
+cd dotfiles
+ls
+ls -lah
+ls | sort-by name | select permissions size name
+ls | sort-by name | update size {|it| $it.size | into filesize } | select permissions size name
+ls | sort-by name | select size name
+ls | sort-by name
+ls | sort-by name | update size {|it| $it.size | into filesize } | select type size name
+ls --all
+ls | sort-by name --all
+ls --all | sort-by name

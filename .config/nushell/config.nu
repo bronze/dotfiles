@@ -18,17 +18,17 @@
 #     config nu --doc | nu-highlight | less -R
 
 $env.config.buffer_editor = "code"
+$env.config.show_banner = false
 
-source ~/.config/nushell/zoxide.nu
-source ~/.config/nushell/atuin.nu
+# Brew path (opcional se precisar)
+# let-env PATH = ($env.PATH | append '/home/linuxbrew/.linuxbrew/bin') # ja ta no env
 
-
-# source ~/.local/share/atuin/init.nu
-# Atuin
-#let-env ATUIN_NOBIND = "true" # evita conflito de atalhos
-#atuin init nu | save -f ~/.config/nushell/atuin.nu
-#source ~/.config/nushell/atuin.nu
+# Oh My Posh
+source ~/.config/nushell/omp.nu
 
 # Zoxide
-#zoxide init nushell | save -f ~/.config/nushell/zoxide.nu
-#source ~/.config/nushell/zoxide.nu
+source ~/.config/nushell/zoxide.nu
+
+# Atuin
+$env.ATUIN_NOBIND = "true"
+source ~/.config/nushell/atuin.nu
