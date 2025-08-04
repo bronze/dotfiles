@@ -1,16 +1,25 @@
-# oh-my-posh init fish | source https://ohmyposh.dev/ https://github.com/jandedobbeleer/oh-my-posh
+# ── oh-my-posh: prompt theming ────────────────────────────────────────────────
+# Docs: https://ohmyposh.dev/ | Repo: https://github.com/jandedobbeleer/oh-my-posh
 oh-my-posh init fish --config ~/.poshthemes/tonybaloney.nord.omp.json | source
+
+# Add Homebrew binaries to PATH (required for oh-my-posh and other tools)
 set -gx PATH /home/linuxbrew/.linuxbrew/bin $PATH
+
+# Disable the default fish greeting
 set fish_greeting
 
-# Set up zoxide https://github.com/ajeetdsouza/zoxide
-# zoxide init fish | source
-zoxide init fish --cmd cd | source # zoxide replacing the cd command
-set -x _ZO_ECHO '1' # When set to 1, z will print the matched directory before navigating to it.
+
+# ── zoxide: smarter cd command ────────────────────────────────────────────────
+# Docs: https://github.com/ajeetdsouza/zoxide
+zoxide init fish --cmd cd | source
+set -x _ZO_ECHO 1  # Echo target directory before jumping
 
 
-# Set up fzf key bindings https://github.com/junegunn/fzf
+# ── fzf: fuzzy finder key bindings ────────────────────────────────────────────
+# Docs: https://github.com/junegunn/fzf
 fzf --fish | source
 
-# Set up Atuin for command history
+
+# ── atuin: shell history sync and search ─────────────────────────────────────
+# Docs: https://github.com/ellie/atuin
 atuin init fish | source
