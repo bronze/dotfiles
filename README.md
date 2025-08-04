@@ -7,12 +7,22 @@ This directory contains the dotfiles for my system
 Ensure you have the following installed on your system
 
 ```
-brew install fish oh-my-posh zoxide fzf
+brew install fish oh-my-posh zoxide fzf atuin
 ```
 
 ```
 brew install --cask font-fira-code-nerd-font font-meslo-lg-nerd-font
 ```
+
+Fish - Shell: https://fishshell.com/ https://github.com/fish-shell/fish-shell
+
+Oh My Posh - Theme: https://ohmyposh.dev/ https://github.com/jandedobbeleer/oh-my-posh
+
+Zoxide - Smarter cd command: https://github.com/ajeetdsouza/zoxide
+
+Fzf - Command-line fuzzy finder: https://github.com/junegunn/fzf
+
+Atuin - Shell history: https://atuin.sh/ https://github.com/atuinsh/atuin
 
 ### OhMyZsh
 
