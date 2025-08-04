@@ -62,3 +62,4 @@ $env.config.buffer_editor
 $env.config.buffer_editor = "code"$env.config.buffer_editor
 $env.config.buffer_editor = "code"
 $env.config.buffer_editor
+atuin init nu | save -f ~/.config/nushell/atuin.nu

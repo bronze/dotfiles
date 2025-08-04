@@ -17,9 +17,12 @@
 # options using:
 #     config nu --doc | nu-highlight | less -R
 
-source ~/.config/nushell/zoxide.nu
+$env.config.buffer_editor = "code"
 
-# source ~/.config/nushell/atuin.nu
+source ~/.config/nushell/zoxide.nu
+source ~/.config/nushell/atuin.nu
+
+
 # source ~/.local/share/atuin/init.nu
 # Atuin
 #let-env ATUIN_NOBIND = "true" # evita conflito de atalhos
