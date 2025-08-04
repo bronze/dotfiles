@@ -1,0 +1,64 @@
+mv ~/.config/nushell/* ~/dotfiles/.config/nushell/*
+ls ~/.config/nushell
+use nupm/nupm<\n>nupm install nupm --force --path
+cd ./.config/nushell/
+git clone https://github.com/nushell/nupm
+cd nupm
+use nupm/nupm<\n>nupm install nupm --force --path
+ls
+use nupm/nupm<\n>nupm install nupm --force --path .
+cd ..
+use nupm/nupm<\n>nupm install nupm --force --path
+use nupm/<\n>overlay use nupm/ --prefix
+cd nupm
+use nupm/<\n>overlay use nupm/ --prefix
+use nupm/nupm<\n>nupm install nupm --force --path
+cd ..
+use nupm/nupm<\n>nupm install nupm --force --path
+nupm
+$nu.env-path
+cdi
+mkdir ~/dotfiles/.local/share/atuin/
+cd ..
+cd
+cd dotfiles
+stow .
+mkdir ~/.local/share/atuin/
+atuin init nu | save ~/.local/share/atuin/init.nu
+which nu
+which nu
+ls
+which nu
+brew list atuin zoxide
+brew
+ls
+cd ~
+~
+cd ~
+ls
+config nu
+$env.config.buffer_editor = "code"
+clear
+ls
+cd ~
+ls
+cd ~
+ls
+ls -lah
+ls | lah
+ls | sort-by modified
+ls | sort-by modified | -h
+ls | sort-by modified | hidden
+which zoxide
+code ~/.zoxide.nu
+ls
+atuin init nu | save -f ~/.config/nushell/atuin.nu
+which atuin
+brew install atuin
+$env.PATH = ($env.PATH | split row (char esep) | prepend '/home/linuxbrew/.linuxbrew/bin')
+brew
+brew list
+$env.config.buffer_editor
+$env.config.buffer_editor = "code"$env.config.buffer_editor
+$env.config.buffer_editor = "code"
+$env.config.buffer_editor
