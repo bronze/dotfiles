@@ -6,6 +6,14 @@ This directory contains the dotfiles for my system
 
 Ensure you have the following installed on your system
 
+```
+brew install fish oh-my-posh zoxide fzf
+```
+
+```
+brew install --cask font-fira-code-nerd-font font-meslo-lg-nerd-font
+```
+
 ### OhMyZsh
 
 https://gist.github.com/onlurking/a9537a57600486e6f7408e73f985f4ec
