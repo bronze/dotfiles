@@ -125,3 +125,15 @@ atuin register -u bronze -e carlosbronze@gmail.com
 atuin key
 atuin sync
 cd dotfiles
+git add . ; git commit -m "chatgpt readme"
+git push
+cd coding
+ls
+cd product-videos/
+npm-check -u
+npm i -g npm-check
+volta install npm-check
+which npm-check
+volta install vercel
+which vercel
+which npm-check

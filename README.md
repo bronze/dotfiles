@@ -42,6 +42,12 @@ npm -v
 - [FNM](https://github.com/Schniz/fnm)
 - [asdf](https://asdf-vm.com/)
 
+## Volta packages:
+
+```
+volta install npm pnpm npm-check vercel
+```
+
 ---
 
 ## 🐚 Shell Setup
