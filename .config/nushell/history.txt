@@ -76,3 +76,4 @@ ls | sort-by name | update size {|it| $it.size | into filesize } | select type s
 ls --all
 ls | sort-by name --all
 ls --all | sort-by name
+ls

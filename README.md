@@ -16,6 +16,8 @@ brew install --cask font-fira-code-nerd-font font-meslo-lg-nerd-font
 
 Fish - Shell: https://fishshell.com/ https://github.com/fish-shell/fish-shell
 
+Oh My Fish https://github.com/oh-my-fish/oh-my-fish?tab=readme-ov-file#installation
+
 Oh My Posh - Theme: https://ohmyposh.dev/ https://github.com/jandedobbeleer/oh-my-posh
 
 Zoxide - Smarter cd command: https://github.com/ajeetdsouza/zoxide
