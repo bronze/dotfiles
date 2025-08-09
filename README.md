@@ -1,129 +1,136 @@
-# My dotfiles
+# My Dotfiles
 
-This directory contains the dotfiles for my system
+Personal configuration files for my development environment, managed with **GNU Stow** for easy setup and portability.
 
-## Requirements
+## 📦 Requirements
 
-Ensure you have the following installed on your system
+Install the required tools:
 
-```
+```bash
 brew install nushell fish oh-my-posh zoxide fzf atuin
-```
-
-```
 brew install --cask font-fira-code-nerd-font font-meslo-lg-nerd-font
 ```
 
-## Volta for node npm and pnpm
+For Linux:
 
+```bash
+sudo apt update && sudo apt install git stow
+# or
+pacman -S git stow
 ```
-# install Volta
+
+---
+
+## ⚡ Node.js Environment (Volta)
+
+[Volta](https://volta.sh) manages Node, npm, and pnpm consistently across shells.
+
+```bash
+# Install Volta
 curl https://get.volta.sh | bash
 
-# install Node
+# Install Node
 volta install node
 
-# start using Node
-node
+# Test
+node -v
+npm -v
 ```
 
-alternative would be
-fnm: https://github.com/Schniz/fnm
-or asdf: https://asdf-vm.com/
+**Alternatives:**
 
-## Nushell https://www.nushell.sh/book/installation.html
+- [FNM](https://github.com/Schniz/fnm)
+- [asdf](https://asdf-vm.com/)
 
-## Fish
+---
 
-Fish - Shell: https://fishshell.com/ https://github.com/fish-shell/fish-shell
+## 🐚 Shell Setup
 
-Theme: Oh My Posh - Theme: https://ohmyposh.dev/ https://github.com/jandedobbeleer/oh-my-posh
+### Nushell
 
-Plugins:
+- [Docs](https://www.nushell.sh/book/installation.html)
 
-- Oh My Fish https://github.com/oh-my-fish/oh-my-fish?tab=readme-ov-file#installation
+### Fish Shell
 
-- Fisher https://github.com/jorgebucaran/fisher
+- [Fish](https://fishshell.com/) | [GitHub](https://github.com/fish-shell/fish-shell)
+- Theme: [Oh My Posh](https://ohmyposh.dev/)
+- Plugin manager: [Fisher](https://github.com/jorgebucaran/fisher)
+- Plugins:
 
-- Zoxide - Smarter cd command: https://github.com/ajeetdsouza/zoxide
+  - [Zoxide](https://github.com/ajeetdsouza/zoxide) – smarter `cd`
+  - [Fzf](https://github.com/junegunn/fzf) – fuzzy finder
+  - [Atuin](https://atuin.sh/) – shell history sync/search
+  - Optional: [Oh My Fish](https://github.com/oh-my-fish/oh-my-fish)
 
-- Fzf - Command-line fuzzy finder: https://github.com/junegunn/fzf
+### Zsh
 
-- Atuin - Shell history: https://atuin.sh/ https://github.com/atuinsh/atuin
+- [Oh My Zsh](https://ohmyz.sh/)
 
-## OhMyZsh https://ohmyz.sh/
-
-```
+```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 ```
 
-https://gist.github.com/onlurking/a9537a57600486e6f7408e73f985f4ec
+- [zsh-completions](https://github.com/zsh-users/zsh-completions):
 
-https://dev.to/abdfnx/oh-my-zsh-powerlevel10k-cool-terminal-1no0
-
-https://medium.com/@satriajanaka09/setup-zsh-oh-my-zsh-powerlevel10k-on-ubuntu-20-04-c4a4052508fd
-
-### zsh-completions
-
-https://github.com/zsh-users/zsh-completions
-
-```
+```bash
 git clone https://github.com/zsh-users/zsh-completions.git \
  ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
 ```
 
-## Git
+- Useful reads:
 
-```
-pacman -S git
-```
+  - [Powerlevel10k setup](https://dev.to/abdfnx/oh-my-zsh-powerlevel10k-cool-terminal-1no0)
+  - [Customization on Ubuntu](https://medium.com/@satriajanaka09/setup-zsh-oh-my-zsh-powerlevel10k-on-ubuntu-20-04-c4a4052508fd)
 
-```
-sudo apt update
-sudo apt install git
-```
+---
 
-## Stow
+## 🔗 Managing with GNU Stow
 
-```
-pacman -S stow
-```
+Clone the repository and create symlinks:
 
-```
-sudo apt update
-sudo apt install stow
+```bash
+git clone git@github.com:bronze/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+stow .
 ```
 
-```
-stow --version
-```
+---
 
-## Installation
+## 🚀 Post-install Setup
 
-First, check out the dotfiles repo in your $HOME directory using git
+To ensure all tools are initialized in every shell:
 
-```
-$ git clone git@github.com/bronze/dotfiles.git
-$ cd dotfiles
-```
+### Zsh (`~/.zshrc`)
 
-then use GNU stow to create symlinks
-
-```
-$ stow .
+```bash
+eval "$(atuin init zsh)"
+eval "$(zoxide init zsh)"
+eval "$(oh-my-posh init zsh)"
 ```
 
-## References
+### Fish (`~/.config/fish/config.fish`)
 
-This Zsh config is perhaps my favorite one yet.: https://youtu.be/ud7YxC33Z3w
+```fish
+atuin init fish | source
+zoxide init fish | source
+oh-my-posh init fish | source
+```
 
-Stow has forever changed the way I manage my dotfiles: https://youtu.be/y6XCebnB9gs
+### Nushell (`~/.config/nushell/config.nu`)
 
-https://github.com/dreamsofautonomy/dotfiles
+```nu
+source-env (atuin init nu | save -f ~/.atuin.nu)
+source-env (zoxide init nu | save -f ~/.zoxide.nu)
+source-env (oh-my-posh init nu | save -f ~/.omp.nu)
+```
 
-Level up the look of your terminal with Oh-My-Posh: https://youtu.be/nGHgyPLi7UM
+---
 
-How to Customize WSL & CMD in Windows Terminal with Oh My Posh!: https://youtu.be/lxNLJsDKyU4
+## 📚 References
 
-Make WSL/Ubuntu Terminal Look Better | Oh My Posh Guide: https://youtu.be/2LEnBXH8xV0
+- [Zsh config walkthrough](https://youtu.be/ud7YxC33Z3w)
+- [GNU Stow for dotfiles](https://youtu.be/y6XCebnB9gs)
+- [dreamsofautonomy/dotfiles](https://github.com/dreamsofautonomy/dotfiles)
+- [Oh My Posh customization](https://youtu.be/nGHgyPLi7UM)
+- [Windows Terminal + Oh My Posh](https://youtu.be/lxNLJsDKyU4)
+- [WSL Ubuntu terminal customization](https://youtu.be/2LEnBXH8xV0)
