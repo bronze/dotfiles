@@ -65,3 +65,4 @@ setopt auto_cd
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # Priorizar o Fish do Homebrew no PATH
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+eval "$(atuin init zsh)"

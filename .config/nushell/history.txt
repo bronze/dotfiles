@@ -115,3 +115,13 @@ git add . && git commit -m "volta and remove nvm" -amend
 git add . && git commit -m "volta and remove nvm" --amend
 git add . && git commit -m "volta and remove nvm" -ammend
 git add . && git commit -m "volta and remove nvm" --amend
+git add . ; git commit -m "volta and remove nvm" --amend
+git push
+git push -fsource-env (atuin init nu | save -f ~/.atuin.nu)
+source-env (atuin init nu | save -f ~/.atuin.nu)
+nushell
+clear
+atuin register -u bronze -e carlosbronze@gmail.com
+atuin key
+atuin sync
+cd dotfiles
