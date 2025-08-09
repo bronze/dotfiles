@@ -7,12 +7,33 @@ This directory contains the dotfiles for my system
 Ensure you have the following installed on your system
 
 ```
-brew install fish oh-my-posh zoxide fzf atuin
+brew install nushell fish oh-my-posh zoxide fzf atuin
 ```
 
 ```
 brew install --cask font-fira-code-nerd-font font-meslo-lg-nerd-font
 ```
+
+## Volta for node npm and pnpm
+
+```
+# install Volta
+curl https://get.volta.sh | bash
+
+# install Node
+volta install node
+
+# start using Node
+node
+```
+
+alternative would be
+fnm: https://github.com/Schniz/fnm
+or asdf: https://asdf-vm.com/
+
+## Nushell https://www.nushell.sh/book/installation.html
+
+## Fish
 
 Fish - Shell: https://fishshell.com/ https://github.com/fish-shell/fish-shell
 
@@ -30,7 +51,12 @@ Plugins:
 
 - Atuin - Shell history: https://atuin.sh/ https://github.com/atuinsh/atuin
 
-### OhMyZsh
+## OhMyZsh https://ohmyz.sh/
+
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+```
 
 https://gist.github.com/onlurking/a9537a57600486e6f7408e73f985f4ec
 
@@ -47,7 +73,7 @@ git clone https://github.com/zsh-users/zsh-completions.git \
  ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
 ```
 
-### Git
+## Git
 
 ```
 pacman -S git
@@ -58,7 +84,7 @@ sudo apt update
 sudo apt install git
 ```
 
-### Stow
+## Stow
 
 ```
 pacman -S stow

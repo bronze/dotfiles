@@ -23,3 +23,5 @@ fzf --fish | source
 # ── atuin: shell history sync and search ─────────────────────────────────────
 # Docs: https://github.com/ellie/atuin
 atuin init fish | source
+set -gx VOLTA_HOME "$HOME/.volta"
+set -gx PATH "$VOLTA_HOME/bin" $PATH

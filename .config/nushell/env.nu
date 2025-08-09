@@ -22,3 +22,10 @@ zoxide init nushell --cmd cd | save -f ~/.zoxide.nu
 # Homebrew on nushell https://reimbar.org/dev/nushell/ https://www.nushell.sh/book/configuration.html#homebrew
 use std "path add"
 path add "/home/linuxbrew/.linuxbrew/bin"
+
+# Node via NVM e PNPM
+# path add "/home/bronze/.nvm/versions/node/v20.14.0/bin"
+# path add "/home/bronze/.local/share/pnpm"
+
+# Volta
+path add ($env.PATH | prepend $"($nu.home-path)/.volta/bin")

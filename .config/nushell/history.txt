@@ -77,3 +77,41 @@ ls --all
 ls | sort-by name --all
 ls --all | sort-by name
 ls
+npm
+source ~/.config/nushell/env.nu
+npm
+pnpm
+which pnpm
+curl https://get.volta.sh | bash
+node -v
+ubuntu -v
+lsb_release -a
+volta install pnpm
+volta -v
+volta install pnpm
+volta install node
+volta install pnpm
+path add --move $nu.home-path/.volta/bin
+let-env PATH = ($env.PATH | prepend $"($nu.home-path)/.volta/bin")<\n>
+source ~/.config/nushell/env.nu<\n>
+source ~/.config/nushell/env.nu
+volta install pnpm
+config --get path<\n>
+echo $nu.path<\n>
+source ~/.config/nushell/env.nu
+echo $nu.path
+echo $env.path
+volta install npm
+rm -rf ~/.nvm<\n>
+pnpm
+which pnpm
+volta install pnpm
+which nu
+git add . && git commit -m "volta and remove nvm"
+ls
+source ~/.config/nushell/env.nu
+source ~/.config/nushell/config.nu
+git add . && git commit -m "volta and remove nvm" -amend
+git add . && git commit -m "volta and remove nvm" --amend
+git add . && git commit -m "volta and remove nvm" -ammend
+git add . && git commit -m "volta and remove nvm" --amend

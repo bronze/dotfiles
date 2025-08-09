@@ -23,8 +23,6 @@ autoload -U compinit && compinit
 # Oh My Zsh
 source $ZSH/oh-my-zsh.sh
 
-source ~/.nvm/nvm.sh
-
 # User configuration
 
 # Aliases
