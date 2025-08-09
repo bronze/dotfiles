@@ -16,15 +16,19 @@ brew install --cask font-fira-code-nerd-font font-meslo-lg-nerd-font
 
 Fish - Shell: https://fishshell.com/ https://github.com/fish-shell/fish-shell
 
-Oh My Fish https://github.com/oh-my-fish/oh-my-fish?tab=readme-ov-file#installation
+Theme: Oh My Posh - Theme: https://ohmyposh.dev/ https://github.com/jandedobbeleer/oh-my-posh
 
-Oh My Posh - Theme: https://ohmyposh.dev/ https://github.com/jandedobbeleer/oh-my-posh
+Plugins:
 
-Zoxide - Smarter cd command: https://github.com/ajeetdsouza/zoxide
+- Oh My Fish https://github.com/oh-my-fish/oh-my-fish?tab=readme-ov-file#installation
 
-Fzf - Command-line fuzzy finder: https://github.com/junegunn/fzf
+- Fisher https://github.com/jorgebucaran/fisher
 
-Atuin - Shell history: https://atuin.sh/ https://github.com/atuinsh/atuin
+- Zoxide - Smarter cd command: https://github.com/ajeetdsouza/zoxide
+
+- Fzf - Command-line fuzzy finder: https://github.com/junegunn/fzf
+
+- Atuin - Shell history: https://atuin.sh/ https://github.com/atuinsh/atuin
 
 ### OhMyZsh
 
