@@ -21,6 +21,9 @@
 use std "path add"
 path add "/home/linuxbrew/.linuxbrew/bin"
 
+# Detect VSCode on Windows
+path add "/mnt/c/Users/bronze/AppData/Local/Programs/Microsoft VS Code/bin"
+
 # Node via NVM e PNPM -> Volta taking care of this
 # path add "/home/bronze/.nvm/versions/node/v20.14.0/bin"
 # path add "/home/bronze/.local/share/pnpm"

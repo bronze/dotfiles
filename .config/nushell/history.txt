@@ -156,3 +156,7 @@ sudo rm -f /usr/local/bin/oh-my-posh
 oh-my-posh init nu
 oh-my-posh init nu --config ~/.poshthemes/tonybaloney.nord.omp.json | save -f ~/.config/nushell/omp.nu
 ls
+cd dotfiles
+code .
+code --version<\n>
+git add . && git commit -m "vscode on windows"

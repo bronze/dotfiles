@@ -18,6 +18,8 @@
 #     config nu --doc | nu-highlight | less -R
 
 $env.config.buffer_editor = "code"
+
+# Disable the default greeting
 $env.config.show_banner = false
 
 # Add Homebrew binaries to PATH (required for oh-my-posh and other tools)
