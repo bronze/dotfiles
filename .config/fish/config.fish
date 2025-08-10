@@ -1,7 +1,6 @@
 # Disable the default fish greeting
 set fish_greeting
 
-
 # Add Homebrew binaries to PATH (required for oh-my-posh and other tools)
 # this comes BEFORE oh-my-posh
 fish_add_path /home/linuxbrew/.linuxbrew/bin
@@ -9,13 +8,10 @@ fish_add_path /home/linuxbrew/.linuxbrew/bin
 # Detect VSCode on Windows
 fish_add_path "/mnt/c/Users/bronze/AppData/Local/Programs/Microsoft VS Code/bin"
 
-
-
 # ── volta: JavaScript toolchain manager ───────────────────────────────────────
 # Docs: https://volta.sh/ | Repo: https://github.com/volta-cli/volta
 set -gx VOLTA_HOME "$HOME/.volta"
 fish_add_path "$VOLTA_HOME/bin"
-
 
 # THEME
 # ── oh-my-posh: prompt theming ────────────────────────────────────────────────
