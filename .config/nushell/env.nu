@@ -17,15 +17,19 @@
 # You can remove these comments if you want or leave
 # them for future reference.
 
-zoxide init nushell --cmd cd | save -f ~/.zoxide.nu
-
 # Homebrew on nushell https://reimbar.org/dev/nushell/ https://www.nushell.sh/book/configuration.html#homebrew
 use std "path add"
 path add "/home/linuxbrew/.linuxbrew/bin"
 
-# Node via NVM e PNPM
+# Node via NVM e PNPM -> Volta taking care of this
 # path add "/home/bronze/.nvm/versions/node/v20.14.0/bin"
 # path add "/home/bronze/.local/share/pnpm"
 
-# Volta
+# ── volta: JavaScript toolchain manager ───────────────────────────────────────
+# Docs: https://volta.sh/ | Repo: https://github.com/volta-cli/volta
 path add ($env.PATH | prepend $"($nu.home-path)/.volta/bin")
+
+# PLUGINS
+# ── zoxide: smarter cd command ────────────────────────────────────────────────
+# Docs: https://github.com/ajeetdsouza/zoxide
+zoxide init nushell --cmd cd | save -f ~/.zoxide.nu

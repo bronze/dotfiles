@@ -20,15 +20,21 @@
 $env.config.buffer_editor = "code"
 $env.config.show_banner = false
 
-# Brew path (opcional se precisar)
-# let-env PATH = ($env.PATH | append '/home/linuxbrew/.linuxbrew/bin') # ja ta no env
+# Add Homebrew binaries to PATH (required for oh-my-posh and other tools)
+# Beind done in env.nu in Nushell
+# let-env PATH = ($env.PATH | append '/home/linuxbrew/.linuxbrew/bin')
 
-# Oh My Posh
+# THEME
+# ── oh-my-posh: prompt theming ────────────────────────────────────────────────
+# Docs: https://ohmyposh.dev/ | Repo: https://github.com/jandedobbeleer/oh-my-posh
 # oh-my-posh init nu --config ~/.poshthemes/tonybaloney.nord.omp.json
 
-# Zoxide
+# PLUGINS
+# ── zoxide: smarter cd command ────────────────────────────────────────────────
+# Docs: https://github.com/ajeetdsouza/zoxide
 source ~/.config/nushell/zoxide.nu
 
-# Atuin
+# ── atuin: shell history sync and search ─────────────────────────────────────
+# Docs: https://github.com/ellie/atuin
 $env.ATUIN_NOBIND = "true"
 source ~/.config/nushell/atuin.nu
