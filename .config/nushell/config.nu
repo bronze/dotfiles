@@ -24,7 +24,7 @@ $env.config.show_banner = false
 # let-env PATH = ($env.PATH | append '/home/linuxbrew/.linuxbrew/bin') # ja ta no env
 
 # Oh My Posh
-source ~/.config/nushell/omp.nu
+# oh-my-posh init nu --config ~/.poshthemes/tonybaloney.nord.omp.json
 
 # Zoxide
 source ~/.config/nushell/zoxide.nu

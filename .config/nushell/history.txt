@@ -137,3 +137,22 @@ which npm-check
 volta install vercel
 which vercel
 which npm-check
+fish
+ls
+brew doctor
+# escolha uma das duas e mantenha só ela<\n>brew reinstall oh-my-posh<\n># ou, se quiser a do tap:<\n># brew reinstall jandedobbeleer/oh-my-posh/oh-my-posh<\n>
+ls
+which oh-my-posh<\n>nu -c 'source ~/.cache/oh-my-posh.nu; echo OK'<\n>
+which oh-my-posh
+echo $env.OMP_CONFIG
+nu -c 'source ~/.config/nushell/config.nu; echo Tema aplicado'
+echo $env.OMP_CONFIG
+which -a oh-my-posh
+source ~/.config/nushell/config.nu
+echo $env.OMP_CONFIG
+/home/linuxbrew/.linuxbrew/bin/oh-my-posh --version
+/usr/local/bin/oh-my-posh --version
+sudo rm -f /usr/local/bin/oh-my-posh
+oh-my-posh init nu
+oh-my-posh init nu --config ~/.poshthemes/tonybaloney.nord.omp.json | save -f ~/.config/nushell/omp.nu
+ls
