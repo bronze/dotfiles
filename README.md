@@ -7,7 +7,7 @@ Personal configuration files for my development environment, managed with **GNU 
 Install the required tools:
 
 ```bash
-brew install nushell fish oh-my-posh zoxide fzf atuin
+brew install nushell fish oh-my-posh zoxide fzf atuin eza
 brew install --cask font-fira-code-nerd-font font-meslo-lg-nerd-font
 ```
 
@@ -18,6 +18,13 @@ sudo apt update && sudo apt install git stow
 # or
 pacman -S git stow
 ```
+
+- `nushell` - Modern shell env
+- `oh-my-posh` - Customisable prompt theme
+- `zoxide` - A smarter cd command
+- `fzf` - Fuzzy finder for files and commands
+- `atuin` - shell history sync/search
+- `eza` - A modern alternative to ls
 
 ---
 
@@ -45,8 +52,14 @@ npm -v
 ## Volta packages:
 
 ```
-volta install npm pnpm npm-check vercel
+volta install npm pnpm npm-check vercel jq
 ```
+
+- `npm` - The OG
+- `pnpm` - Fast, disk space efficient package manager
+- `npm-check` - Check for outdated, incorrect, and unused dependencies.
+- `vercel` - Vercel CLI
+- `jq` - JSON processor and formatter
 
 ---
 
@@ -134,9 +147,16 @@ source-env (oh-my-posh init nu | save -f ~/.omp.nu)
 
 ## 📚 References
 
-- [Zsh config walkthrough](https://youtu.be/ud7YxC33Z3w)
-- [GNU Stow for dotfiles](https://youtu.be/y6XCebnB9gs)
+- [Dreams of Autonomy: This Zsh config is perhaps my favorite one yet.](https://youtu.be/ud7YxC33Z3w)
+- [Dreams of Autonomy: Stow has forever changed the way I manage my dotfiles](https://youtu.be/y6XCebnB9gs)
 - [dreamsofautonomy/dotfiles](https://github.com/dreamsofautonomy/dotfiles)
-- [Oh My Posh customization](https://youtu.be/nGHgyPLi7UM)
-- [Windows Terminal + Oh My Posh](https://youtu.be/lxNLJsDKyU4)
-- [WSL Ubuntu terminal customization](https://youtu.be/2LEnBXH8xV0)
+
+- [TechTimeFly: Oh My Posh customization](https://youtu.be/nGHgyPLi7UM)
+- [Jordi Adoumie: Windows Terminal + Oh My Posh](https://youtu.be/lxNLJsDKyU4)
+- [TroubleChute: WSL Ubuntu terminal customization](https://youtu.be/2LEnBXH8xV0)
+
+## Also
+
+A cross-platform dotfile management system using GNU Stow for simple, symlink-based configuration management.
+
+- [Dotfiles Setup](https://github.com/ugudlado/shell)
