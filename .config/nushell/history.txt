@@ -188,3 +188,41 @@ vercel whoami
 vercel -l
 ls
 npm -l
+eza README.md 
+carapace --selfupdate 
+carapace update
+source ~/.config/nushell/config.nu
+brew install carapace-bin
+which eza
+eza --version
+which carapace
+carapace --version
+open ~/.cache/carapace/init.nu | lines | first 3
+echo $env.path
+ls
+cd dotfiles/
+;s
+ls
+cd coding
+cd carlosbronze-notion/
+carlosbronze-no
+cd carlosbronze-notion/
+cd coding
+cd carlosbronze-notion/
+cd coding/carlosbronze-notion/
+ls
+lsls
+ls
+cd dotfiles/
+cd coding/carlosbronze-notion/
+cd ..
+cd coding
+ls
+cd mb-shadcn/
+cd ../speedlify/
+oh-my-posh init nu --config ~/.poshthemes/bronze.toml
+ls
+oh-my-posh init nu --config ~/.poshthemes/bronze.toml
+git add . && git commit -m "bronze.toml"
+cd dotfiles/
+ls

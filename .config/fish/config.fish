@@ -16,7 +16,7 @@ fish_add_path "$VOLTA_HOME/bin"
 # THEME
 # ── oh-my-posh: prompt theming ────────────────────────────────────────────────
 # Docs: https://ohmyposh.dev/ | Repo: https://github.com/jandedobbeleer/oh-my-posh
-oh-my-posh init fish --config ~/.poshthemes/tonybaloney.nord.omp.json | source
+oh-my-posh init fish --config ~/.poshthemes/bronze.toml | source
 
 # PLUGINS
 # ── zoxide: smarter cd command ────────────────────────────────────────────────
