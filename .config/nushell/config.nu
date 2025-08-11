@@ -44,3 +44,8 @@ source ~/.config/nushell/atuin.nu
 # ── carapace: A multi-shell completion manager ────────────────────────────────
 # Docs: https://carapace-sh.github.io/carapace-bin/setup.html
 source ~/.cache/carapace/init.nu
+
+
+# Custom completions
+source ~/.config/nushell/completions/git-completions.nu
+source ~/.config/nushell/completions/npm-completions.nu

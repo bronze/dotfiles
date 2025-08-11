@@ -177,3 +177,14 @@ cmd
 oh-my-posh init nu --config ~/.poshthemes/tonybaloney.nord.omp.json
 ls
 brew install carapace
+cd dotfiles/
+cdi
+config nu
+$env.EDITOR
+$env.EDITOR = "Code"
+$env.EDITOR
+nu -c 'source ~/.config/nushell/config.nu'
+vercel whoami 
+vercel -l
+ls
+npm -l
