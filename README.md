@@ -7,7 +7,7 @@ Personal configuration files for my development environment, managed with **GNU 
 Install the required tools:
 
 ```bash
-brew install nushell fish oh-my-posh zoxide fzf atuin eza
+brew install nushell fish oh-my-posh zoxide fzf atuin eza carapace
 ```
 
 For Linux:
@@ -24,6 +24,7 @@ pacman -S git stow
 - `fzf` - Fuzzy finder for files and commands
 - `atuin` - shell history sync/search
 - `eza` - A modern alternative to ls
+- `carapace` - A multi-shell completion manager
 
 Nerd Fonts:
 
@@ -89,13 +90,14 @@ volta install npm pnpm npm-check vercel jq
 - Theme: [Oh My Posh](https://ohmyposh.dev/)
 - Plugin manager: [Fisher](https://github.com/jorgebucaran/fisher)
 - Plugins:
-
   - [Zoxide](https://github.com/ajeetdsouza/zoxide) – smarter `cd`
   - [Fzf](https://github.com/junegunn/fzf) – fuzzy finder
   - [Atuin](https://atuin.sh/) – shell history sync/search
   - Optional: [Oh My Fish](https://github.com/oh-my-fish/oh-my-fish)
 
 ### Zsh
+
+_I havent reinstalled Zsh with OhMyPosh on this machine so there should be legacy stuff in `.zshrc`_
 
 - [Oh My Zsh](https://ohmyz.sh/)
 
@@ -164,6 +166,11 @@ source-env (oh-my-posh init nu | save -f ~/.omp.nu)
 - [Dreams of Autonomy: This Zsh config is perhaps my favorite one yet.](https://youtu.be/ud7YxC33Z3w)
 - [Dreams of Autonomy: Stow has forever changed the way I manage my dotfiles](https://youtu.be/y6XCebnB9gs)
 - [dreamsofautonomy/dotfiles](https://github.com/dreamsofautonomy/dotfiles)
+
+- [DevOps Toolbox: Is Nushell Worth The Hype?](https://youtu.be/uJsZATwQ3R8)
+- [DevOps Toolbox: I Was Wrong About Nushell (I Finally Get It Now)](https://youtu.be/LFBOLx5KiME)
+- [](https://youtu.be/)
+- [](https://youtu.be/)
 
 - [TechTimeFly: Oh My Posh customization](https://youtu.be/nGHgyPLi7UM)
 - [Jordi Adoumie: Windows Terminal + Oh My Posh](https://youtu.be/lxNLJsDKyU4)

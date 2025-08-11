@@ -28,6 +28,11 @@ set -x _ZO_ECHO 1  # Echo target directory before jumping
 # Docs: https://github.com/junegunn/fzf
 fzf --fish | source
 
-# ── atuin: shell history sync and search ─────────────────────────────────────
+# ── atuin: shell history sync and search ──────────────────────────────────────
 # Docs: https://github.com/ellie/atuin
 atuin init fish | source
+
+# ── carapace: A multi-shell completion manager ────────────────────────────────
+# Docs: https://carapace-sh.github.io/carapace-bin/setup.html
+set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense' # optional
+carapace _carapace | source

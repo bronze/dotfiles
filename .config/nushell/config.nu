@@ -36,7 +36,11 @@ $env.config.show_banner = false
 # Docs: https://github.com/ajeetdsouza/zoxide
 source ~/.config/nushell/zoxide.nu
 
-# ── atuin: shell history sync and search ─────────────────────────────────────
+# ── atuin: shell history sync and search ──────────────────────────────────────
 # Docs: https://github.com/ellie/atuin
 $env.ATUIN_NOBIND = "true"
 source ~/.config/nushell/atuin.nu
+
+# ── carapace: A multi-shell completion manager ────────────────────────────────
+# Docs: https://carapace-sh.github.io/carapace-bin/setup.html
+source ~/.cache/carapace/init.nu

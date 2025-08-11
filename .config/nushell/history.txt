@@ -167,3 +167,13 @@ eza
 cd dotfiles/
 ls
 eza
+source ~/.config/fish/config.fish
+source ~/.config/nushell/config.nu
+asd
+ls
+source ~/.config/nushell/config.nu
+ls
+cmd
+oh-my-posh init nu --config ~/.poshthemes/tonybaloney.nord.omp.json
+ls
+brew install carapace

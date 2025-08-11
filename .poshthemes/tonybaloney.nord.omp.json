@@ -2,6 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "blocks": [
     {
+      "type": "prompt",
       "alignment": "left",
       "segments": [
         {
@@ -43,10 +44,10 @@
           "template": " \uf0e7 ",
           "type": "root"
         }
-      ],
-      "type": "prompt"
+      ]
     },
     {
+      "type": "rprompt",
       "alignment": "right",
       "overflow": "hide",
       "segments": [
@@ -145,10 +146,14 @@
             "shell": "bash"
           }
         }
-      ],
-      "type": "rprompt"
+      ]
     }
   ],
+  "transient_prompt": {
+    "background": "transparent",
+    "foreground": "#ffffff",
+    "template": "{{ .Shell }}> "
+  },
   "final_space": true,
   "version": 3
 }

@@ -36,3 +36,9 @@ path add ($env.PATH | prepend $"($nu.home-path)/.volta/bin")
 # ── zoxide: smarter cd command ────────────────────────────────────────────────
 # Docs: https://github.com/ajeetdsouza/zoxide
 zoxide init nushell --cmd cd | save -f ~/.zoxide.nu
+
+# ── carapace: A multi-shell completion manager ────────────────────────────────
+# Docs: https://carapace-sh.github.io/carapace-bin/setup.html
+$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
+mkdir ~/.cache/carapace
+carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
