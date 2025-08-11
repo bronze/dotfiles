@@ -1,68 +1,85 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+##### PATHS
+# ── Homebrew: package manager ─────────────────────────────────────────────────
+# Docs: https://brew.sh/
+if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="/usr/local/bin:$PATH"
-export PATH="/home/bronze/.local/bin:$PATH"
+# ── VS Code: editor on Windows WSL ────────────────────────────────────────────
+# Docs: https://code.visualstudio.com/
+if [ -d "/mnt/c/Users/bronze/AppData/Local/Programs/Microsoft VS Code/bin" ]; then
+  export PATH="/mnt/c/Users/bronze/AppData/Local/Programs/Microsoft VS Code/bin:$PATH"
+fi
 
-# Path to your oh-my-zsh installation.
-export ZSH="/home/bronze/.oh-my-zsh"
+# ── Local binaries ────────────────────────────────────────────────────────────
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+
+##### TOOLCHAINS
+# ── Volta: JavaScript toolchain manager ───────────────────────────────────────
+# Docs: https://volta.sh/ | Repo: https://github.com/volta-cli/volta
+export VOLTA_HOME="$HOME/.volta"
+[ -d "$VOLTA_HOME/bin" ] && export PATH="$VOLTA_HOME/bin:$PATH"
+
+# ── pnpm: fast package manager ────────────────────────────────────────────────
+# Docs: https://pnpm.io/
+export PNPM_HOME="$HOME/.local/share/pnpm"
+[ -d "$PNPM_HOME" ] && export PATH="$PNPM_HOME:$PATH"
+
+# ── Bun: JavaScript runtime ───────────────────────────────────────────────────
+# Docs: https://bun.sh/
+export BUN_INSTALL="$HOME/.bun"
+[ -d "$BUN_INSTALL/bin" ] && export PATH="$BUN_INSTALL/bin:$PATH"
+
+# ── Console Ninja ────────────────────────────────────────────────────────────
+# Docs: https://console-ninja.com/
+[ -d "$HOME/.console-ninja/.bin" ] && export PATH="$HOME/.console-ninja/.bin:$PATH"
+
+##### ZSH OPTIONS
+# ── Shell behavior ───────────────────────────────────────────────────────────
+setopt NO_BEEP
+setopt AUTO_CD
+
+##### OH-MY-ZSH
+# ── Framework & Theme ─────────────────────────────────────────────────────────
+# Docs: https://ohmyz.sh/
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+# ── Plugins ───────────────────────────────────────────────────────────────────
 plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting)
 
-# zsh-completions (manual loading)
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+# ── zsh-completions: additional completions ───────────────────────────────────
+# Docs: https://github.com/zsh-users/zsh-completions
+fpath+=(${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src)
 autoload -U compinit && compinit
 
-# Oh My Zsh
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
-# User configuration
-
-# Aliases
-alias coding="cd ~/coding/"
-# alias 720="yt-dlp -f '720p' "
-# alias 720="yt-dlp -S '+res:720,codec' "
-alias 720="yt-dlp -f 'best[height=720]' "
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# pnpm
-export PNPM_HOME="/home/bronze/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-
+##### PLUGINS
+# ── zoxide: smarter cd command ────────────────────────────────────────────────
+# Docs: https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init --cmd cd zsh)"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# ── fzf: fuzzy finder ─────────────────────────────────────────────────────────
+# Docs: https://github.com/junegunn/fzf
+[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 
-# bun completions
-[ -s "/home/bronze/.bun/_bun" ] && source "/home/bronze/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# https://console-ninja.com/
-PATH=~/.console-ninja/.bin:$PATH
-
-# Turn off annoying BEEP on autocomplete
-setopt NO_BEEP
-# Go straight to folder names
-setopt auto_cd
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-# Priorizar o Fish do Homebrew no PATH
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+# ── atuin: shell history sync and search ──────────────────────────────────────
+# Docs: https://github.com/ellie/atuin
 eval "$(atuin init zsh)"
+
+# ── carapace: multi-shell completions ─────────────────────────────────────────
+# Docs: https://carapace-sh.github.io/carapace-bin/
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+source <(carapace _carapace)
+
+##### ALIASES
+# ── Custom commands ──────────────────────────────────────────────────────────
+alias coding="cd ~/coding/"
+alias 720="yt-dlp -f 'best[height=720]' "
+
+##### THEME
+# ── Powerlevel10k: prompt theming ─────────────────────────────────────────────
+# Docs: https://github.com/romkatv/powerlevel10k
+[[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
