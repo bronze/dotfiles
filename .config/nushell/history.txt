@@ -226,3 +226,17 @@ oh-my-posh init nu --config ~/.poshthemes/bronze.toml
 git add . && git commit -m "bronze.toml"
 cd dotfiles/
 ls
+cd coding/carlosbronze-notion/
+cd dotfiles/
+ls
+cd coding/carlosbronze-notion/
+cd coding
+cd carlosbronze-notion/
+ls
+kls
+ls
+cd ../speedlify/
+ls
+cd ../carlosbronze-notion/
+\dasd\ \asd
+cd dotfiles/
