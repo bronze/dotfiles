@@ -8,7 +8,6 @@ Install the required tools:
 
 ```bash
 brew install nushell fish oh-my-posh zoxide fzf atuin eza
-brew install --cask font-fira-code-nerd-font font-meslo-lg-nerd-font
 ```
 
 For Linux:
@@ -25,6 +24,21 @@ pacman -S git stow
 - `fzf` - Fuzzy finder for files and commands
 - `atuin` - shell history sync/search
 - `eza` - A modern alternative to ls
+
+Nerd Fonts:
+
+```
+brew install font-geist-mono-nerd-font
+```
+
+_On Linux you have to add `--cask` after `install`._
+
+GeistMono, FiraCode, JotBransMono, MesloLG all seem cool.
+Geist is the one from Vercel: https://vercel.com/font
+Too bad Inter isn't here.
+
+https://www.nerdfonts.com/font-downloads
+https://github.com/ryanoasis/nerd-fonts
 
 ---
 

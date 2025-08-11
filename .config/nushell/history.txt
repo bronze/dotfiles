@@ -160,3 +160,10 @@ cd dotfiles
 code .
 code --version<\n>
 git add . && git commit -m "vscode on windows"
+ls
+ls -lah
+eza
+eza 
+cd dotfiles/
+ls
+eza
