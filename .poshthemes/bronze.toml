@@ -1,4 +1,7 @@
-console_title_template = " {{ .Folder }} :: {{if .Root}}Admin{{end}}"
+# https://ohmyposh.dev/docs/configuration/title#console-title-template
+#console_title_template = " {{ .Folder }} :: {{if .Root}}Admin{{end}}"
+# console_title_template = " {{ .Shell }} :: {{ .Folder }}{{if .Root}} :: (Admin){{end}}"
+console_title_template = "{{.PWD}}{{if .Root}} :: root{{end}} :: {{.Shell}}"
 final_space = true
 version = 3
 terminal_background = "p:t-background"
