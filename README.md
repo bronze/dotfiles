@@ -7,7 +7,7 @@ Personal configuration files for my development environment, managed with **GNU 
 Install the required tools:
 
 ```bash
-brew install nushell fish oh-my-posh zoxide fzf atuin eza carapace
+brew install nushell fish oh-my-posh zoxide fzf atuin eza carapace gh
 ```
 
 For Linux:
@@ -25,6 +25,7 @@ pacman -S git stow
 - `atuin` - shell history sync/search
 - `eza` - A modern alternative to ls
 - `carapace` - A multi-shell completion manager
+- `gh` - GitHub’s official command line tool
 
 Nerd Fonts:
 
