@@ -68,12 +68,13 @@ npm -v
 ## Volta packages:
 
 ```
-volta install npm pnpm npm-check vercel jq
+volta install npm pnpm npm-check npm-check-updates vercel jq
 ```
 
 - `npm` - The OG
 - `pnpm` - Fast, disk space efficient package manager
 - `npm-check` - Check for outdated, incorrect, and unused dependencies.
+- `npm-check-updates` - Upgrades your package.json dependencies to the latest versions
 - `vercel` - Vercel CLI
 - `jq` - JSON processor and formatter
 
