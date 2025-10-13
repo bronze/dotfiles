@@ -30,7 +30,11 @@ fzf --fish | source
 
 # ── atuin: shell history sync and search ──────────────────────────────────────
 # Docs: https://github.com/ellie/atuin
-atuin init fish | source
+# https://github.com/atuinsh/atuin/issues/2803
+# https://github.com/atuinsh/atuin/pull/2902
+# https://github.com/atuinsh/atuin/issues/2940
+
+atuin init fish | sed "s/-k up/up/g" | source
 
 # ── carapace: A multi-shell completion manager ────────────────────────────────
 # Docs: https://carapace-sh.github.io/carapace-bin/setup.html
