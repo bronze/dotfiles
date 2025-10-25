@@ -40,3 +40,8 @@ atuin init fish | sed "s/-k up/up/g" | source
 # Docs: https://carapace-sh.github.io/carapace-bin/setup.html
 set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense' # optional
 carapace _carapace | source
+
+
+function joinmd
+    find . -name "*.md" -exec cat {} + > all_meetings.md
+end
