@@ -183,3 +183,5 @@ source-env (oh-my-posh init nu | save -f ~/.omp.nu)
 A cross-platform dotfile management system using GNU Stow for simple, symlink-based configuration management.
 
 - [Dotfiles Setup](https://github.com/ugudlado/shell)
+
+_ Last updated 2025-11-12 _
