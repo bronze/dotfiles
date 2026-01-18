@@ -240,3 +240,26 @@ ls
 cd ../carlosbronze-notion/
 \dasd\ \asd
 cd dotfiles/
+which oh-my-posh
+which oh-my-posh<\n>oh-my-posh version<\n>ls -la /home/linuxbrew/.linuxbrew/bin/oh-my-posh<\n>ls -la /home/linuxbrew/.linuxbrew/opt/oh-my-posh/bin/oh-my-posh<\n>
+which oh-my-posh
+oh-my-posh version
+ls -la /home/linuxbrew/.linuxbrew/bin/oh-my-posh
+ls -la /home/linuxbrew/.linuxbrew/opt/oh-my-posh/bin/oh-my-posh
+brew reinstall oh-my-posh
+source ~/.config/nushell/config.nu
+which oh-my-posh
+oh-my-posh version
+nvim /home/bronze/.local/share/nushell/vendor/autoload/init.26.19.0.49ec957a3928dfac.32.nu
+code /home/bronze/.local/share/nushell/vendor/autoload/init.26.19.0.49ec957a3928dfac.32.nu
+source ~/.config/nushell/config.nu
+echo $POSH_THEME
+echo $env.POSH_THEME
+ls
+pwd
+explorer.exe .
+oh-my-posh version
+$env.POSH_THEME
+clear
+$env.POSH_THEME
+oh-my-posh init nu --config ~/.poshthemes/jandedobbeleer.omp.json
