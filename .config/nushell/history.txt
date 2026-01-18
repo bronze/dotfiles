@@ -263,3 +263,5 @@ $env.POSH_THEME
 clear
 $env.POSH_THEME
 oh-my-posh init nu --config ~/.poshthemes/jandedobbeleer.omp.json
+ls
+fish
