@@ -30,7 +30,7 @@ $env.config.show_banner = false
 # ── oh-my-posh: prompt theming ────────────────────────────────────────────────
 # Docs: https://ohmyposh.dev/ | Repo: https://github.com/jandedobbeleer/oh-my-posh
 # oh-my-posh init nu --config ~/.poshthemes/bronze.json
-oh-my-posh init nu --config ~/.poshthemes/jandedobbeleer4.omp.json
+oh-my-posh init nu --config ~/.poshthemes/jandedobbeleer4.nord.json
 
 # PLUGINS
 # ── zoxide: smarter cd command ────────────────────────────────────────────────
