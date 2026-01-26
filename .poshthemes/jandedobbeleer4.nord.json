@@ -23,7 +23,7 @@
             "style": "folder"
           },
           "style": "powerline",
-          "template": " \uea83  {{ .Path }} ",
+          "template": " \uea83  {{ .Folder }} ",
           "type": "path"
         },
         {

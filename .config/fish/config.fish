@@ -45,3 +45,10 @@ carapace _carapace | source
 function joinmd
     find . -name "*.md" -exec cat {} + > all_meetings.md
 end
+
+# Shortcuts
+alias coding="cd ~/coding/"
+alias dotfiles="cd '/home/bronze/dotfiles'"
+alias obsidian="cd '/mnt/c/Users/bronze/Dropbox/Obsidian/Bronze Obsidian'"
+
+# abbr --add obs "cd '/mnt/c/Users/bronze/Dropbox/Obsidian/Bronze Obsidian'"
