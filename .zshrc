@@ -14,6 +14,7 @@ fi
 # ── Local binaries ────────────────────────────────────────────────────────────
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.console-ninja/.bin:$PATH"
 
 ##### TOOLCHAINS
 # ── Volta: JavaScript toolchain manager ───────────────────────────────────────
@@ -85,5 +86,3 @@ alias 720="yt-dlp -f 'best[height=720]' "
 # ── Powerlevel10k: prompt theming ─────────────────────────────────────────────
 # Docs: https://github.com/romkatv/powerlevel10k
 [[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
-
-PATH=~/.console-ninja/.bin:$PATH

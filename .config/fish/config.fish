@@ -12,6 +12,8 @@ fish_add_path "/mnt/c/Users/bronze/AppData/Local/Programs/Microsoft VS Code/bin"
 # Docs: https://volta.sh/ | Repo: https://github.com/volta-cli/volta
 set -gx VOLTA_HOME "$HOME/.volta"
 fish_add_path "$VOLTA_HOME/bin"
+fish_add_path $HOME/.local/bin
+fish_add_path $HOME/.console-ninja/.bin
 
 # THEME
 # ── oh-my-posh: prompt theming ────────────────────────────────────────────────
@@ -38,8 +40,8 @@ atuin init fish | sed "s/-k up/up/g" | source
 
 # ── carapace: A multi-shell completion manager ────────────────────────────────
 # Docs: https://carapace-sh.github.io/carapace-bin/setup.html
-set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense' # optional
-carapace _carapace | source
+# set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense' # optional
+# carapace _carapace | source
 
 
 function joinmd
@@ -50,5 +52,4 @@ end
 alias coding="cd ~/coding/"
 alias dotfiles="cd '/home/bronze/dotfiles'"
 alias obsidian="cd '/mnt/c/Users/bronze/Dropbox/Obsidian/Bronze Obsidian'"
-
 # abbr --add obs "cd '/mnt/c/Users/bronze/Dropbox/Obsidian/Bronze Obsidian'"
