@@ -7,7 +7,7 @@ Personal configuration files for my development environment, managed with **GNU 
 Install the required tools:
 
 ```bash
-brew install nushell fish oh-my-posh zoxide fzf atuin eza carapace gh
+brew install nushell fish oh-my-posh zoxide fzf atuin eza carapace gh python yt-dlp
 ```
 
 For Linux:
@@ -115,7 +115,6 @@ git clone https://github.com/zsh-users/zsh-completions.git \
 ```
 
 - Useful reads:
-
   - [Powerlevel10k setup](https://dev.to/abdfnx/oh-my-zsh-powerlevel10k-cool-terminal-1no0)
   - [Customization on Ubuntu](https://medium.com/@satriajanaka09/setup-zsh-oh-my-zsh-powerlevel10k-on-ubuntu-20-04-c4a4052508fd)
 
@@ -184,4 +183,4 @@ A cross-platform dotfile management system using GNU Stow for simple, symlink-ba
 
 - [Dotfiles Setup](https://github.com/ugudlado/shell)
 
-_Last updated 2025-11-12_
+_Last updated 2026-02-01_
