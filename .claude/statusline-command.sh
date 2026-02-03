@@ -6,12 +6,12 @@
 # Read JSON input from stdin
 input=$(cat)
 
-# Extract values from JSON
+# Extract values from JSON (use full path to avoid Volta's broken jq)
 user=$(whoami)
-cwd=$(echo "$input" | jq -r '.workspace.current_dir')
+cwd=$(echo "$input" | /usr/bin/jq -r '.workspace.current_dir')
 folder=$(basename "$cwd")
-model=$(echo "$input" | jq -r '.model.display_name // "Claude"')
-context_remaining=$(echo "$input" | jq -r '.context_window.remaining_percentage // empty')
+model=$(echo "$input" | /usr/bin/jq -r '.model.display_name // "Claude"')
+context_remaining=$(echo "$input" | /usr/bin/jq -r '.context_window.remaining_percentage // empty')
 
 # Get git info (skip locks for safety)
 git_info=""
@@ -41,11 +41,11 @@ context_info=""
 if [ -n "$context_remaining" ]; then
     context_pct=$(printf "%.0f" "$context_remaining")
     if [ "$context_pct" -lt 20 ]; then
-        context_color="\033[31m"  # Red for low
+        context_color=$(printf '\033[31m')  # Red for low
     elif [ "$context_pct" -lt 50 ]; then
-        context_color="\033[33m"  # Yellow for medium
+        context_color=$(printf '\033[33m')  # Yellow for medium
     else
-        context_color="\033[32m"  # Green for good
+        context_color=$(printf '\033[32m')  # Green for good
     fi
     context_info=" $(printf '\033[2m')│$(printf '\033[0m') ${context_color}${context_pct}%$(printf '\033[0m')"
 fi
