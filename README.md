@@ -18,6 +18,12 @@ sudo apt update && sudo apt install git stow
 pacman -S git stow
 ```
 
+For WSL (Claude Code PDF support):
+
+```bash
+sudo apt-get update && sudo apt-get install poppler-utils
+```
+
 - `nushell` - Modern shell env
 - `oh-my-posh` - Customisable prompt theme
 - `zoxide` - A smarter cd command
