@@ -30,7 +30,7 @@ path add "/mnt/c/Users/bronze/AppData/Local/Programs/Microsoft VS Code/bin"
 
 # ── volta: JavaScript toolchain manager ───────────────────────────────────────
 # Docs: https://volta.sh/ | Repo: https://github.com/volta-cli/volta
-path add ($env.PATH | prepend $"($nu.home-path)/.volta/bin")
+path add ($env.PATH | prepend $"($nu.home-dir)/.volta/bin")
 
 # PLUGINS
 # ── zoxide: smarter cd command ────────────────────────────────────────────────
@@ -39,6 +39,17 @@ zoxide init nushell --cmd cd | save -f ~/.zoxide.nu
 
 # ── carapace: A multi-shell completion manager ────────────────────────────────
 # Docs: https://carapace-sh.github.io/carapace-bin/setup.html
+# $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
+# mkdir ~/.cache/carapace
+# carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+
+# # ${UserConfigDir}/nushell/config.nu
+# source ~/.cache/carapace/init.nu
+
+## ${UserConfigDir}/nushell/env.nu
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
-mkdir ~/.cache/carapace
-carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+mkdir $"($nu.cache-dir)"
+carapace _carapace nushell | save --force $"($nu.cache-dir)/carapace.nu"
+
+# ${UserConfigDir}/nushell/config.nu
+source $"($nu.cache-dir)/carapace.nu"
