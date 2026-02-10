@@ -23,8 +23,10 @@ oh-my-posh init fish --config ~/.poshthemes/jandedobbeleer4.nord.json | source
 # PLUGINS
 # ── zoxide: smarter cd command ────────────────────────────────────────────────
 # Docs: https://github.com/ajeetdsouza/zoxide
-zoxide init fish | source
-set -x _ZO_ECHO 1  # Echo target directory before jumping
+if test "$CLAUDECODE" != "1"
+    zoxide init fish --cmd cd | source
+    set -x _ZO_ECHO 1  # Echo target directory before jumping
+end
 
 # ── fzf: fuzzy finder key bindings ────────────────────────────────────────────
 # Docs: https://github.com/junegunn/fzf
@@ -42,6 +44,10 @@ atuin init fish | sed "s/-k up/up/g" | source
 # Docs: https://carapace-sh.github.io/carapace-bin/setup.html
 # set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense' # optional
 # carapace _carapace | source
+# ${UserConfigDir}/fish/config.fish
+set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense' # optional
+carapace _carapace | source
+
 
 
 function joinmd
