@@ -1,3 +1,10 @@
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("/home/bronze/.oh-my-zsh/custom/completions" $fpath)
+autoload -Uz compinit
+compinit
+# OPENSPEC:END
+
 ##### PATHS
 # ── Homebrew: package manager ─────────────────────────────────────────────────
 # Docs: https://brew.sh/
