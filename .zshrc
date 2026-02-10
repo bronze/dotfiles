@@ -67,7 +67,7 @@ source "$ZSH/oh-my-zsh.sh"
 ##### PLUGINS
 # ── zoxide: smarter cd command ────────────────────────────────────────────────
 # Docs: https://github.com/ajeetdsouza/zoxide
-eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init zsh)"
 
 # ── fzf: fuzzy finder ─────────────────────────────────────────────────────────
 # Docs: https://github.com/junegunn/fzf

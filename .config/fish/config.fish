@@ -23,7 +23,7 @@ oh-my-posh init fish --config ~/.poshthemes/jandedobbeleer4.nord.json | source
 # PLUGINS
 # ── zoxide: smarter cd command ────────────────────────────────────────────────
 # Docs: https://github.com/ajeetdsouza/zoxide
-zoxide init fish --cmd cd | source
+zoxide init fish | source
 set -x _ZO_ECHO 1  # Echo target directory before jumping
 
 # ── fzf: fuzzy finder key bindings ────────────────────────────────────────────
