@@ -46,8 +46,7 @@ atuin init fish | sed "s/-k up/up/g" | source
 # carapace _carapace | source
 # ${UserConfigDir}/fish/config.fish
 set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense' # optional
-carapace _carapace | source
-
+# carapace _carapace | source
 
 
 function joinmd

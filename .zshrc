@@ -93,3 +93,5 @@ alias 720="yt-dlp -f 'best[height=720]' "
 # ── Powerlevel10k: prompt theming ─────────────────────────────────────────────
 # Docs: https://github.com/romkatv/powerlevel10k
 [[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
+
+alias claude-mem='bun "/home/bronze/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
