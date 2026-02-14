@@ -1,7 +1,7 @@
 {
   "statusLine": {
     "type": "command",
-    "command": "SL_THEME=dark SL_SEGMENTS='update context_na_message progress_bar:width=8 percentage tokens:fallback=1 directory git_branch:hide_default=0 git_status usage_5hour:gauge=vertical usage_weekly:gauge=vertical' /home/bronze/.claude/claude-code-status-line.py"
+    "command": "SL_THEME=dark SL_SEGMENTS='update context_na_message progress_bar:width=8 percentage tokens:fallback=1 directory git_branch:hide_default=0 git_status usage_5hour:gauge=vertical usage_weekly:gauge=vertical usage_extra:gauge=vertical' /home/bronze/.claude/claude-code-status-line.py"
   },
   "model": "sonnet"
 }

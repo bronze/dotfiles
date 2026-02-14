@@ -24,6 +24,7 @@ Latest version: https://github.com/benabraham/claude-code-status-line
 """
 
 import json
+import locale
 import os
 import re
 import select
@@ -70,7 +71,7 @@ THEME_FILE = _env_str(
 # --- Segment system ---
 
 DEFAULT_SEGMENTS = (
-    "update model context_na_message progress_bar percentage tokens directory git_branch git_status usage_5hour usage_weekly"
+    "update model context_na_message progress_bar percentage tokens directory git_branch git_status usage_5hour usage_weekly usage_extra"
 )
 VALID_SEGMENTS = frozenset(DEFAULT_SEGMENTS.split() + ["new_line", "usage_burndown"])
 
@@ -81,6 +82,7 @@ SEGMENT_DEFAULTS = {
     "tokens": {"fallback": "0"},
     "usage_5hour": {"gauge": "vertical", "width": "4"},
     "usage_weekly": {"gauge": "vertical", "width": "4"},
+    "usage_extra": {"gauge": "vertical", "width": "4"},
     "usage_burndown": {"coeff": "1.4"},
 }
 
@@ -1467,6 +1469,42 @@ def format_usage_indicators(usage_data):
         if seg not in results:
             results[seg] = ""
 
+    # Extra usage segment
+    if _has_segment("usage_extra"):
+        extra = usage_data.get("extra_usage") if usage_data else None
+        if extra and extra.get("is_enabled") and extra.get("used_credits") is not None:
+            utilization = extra.get("utilization", 0)
+            used_pct_extra = max(0, int(utilization))
+            used_credits = extra["used_credits"] / 100.0  # cents to currency units
+
+            # Format money using locale
+            try:
+                locale.setlocale(locale.LC_ALL, "")
+                money_str = locale.currency(used_credits, grouping=True)
+            except (locale.Error, ValueError):
+                money_str = f"${used_credits:.2f}"
+
+            opts = _segment_opts("usage_extra")
+            gauge_style = opts.get("gauge", "blocks")
+            gauge_width = int(opts.get("width", "4"))
+            # No pace concept for extra usage — always neutral (ratio=1.0)
+            if gauge_style == "none":
+                gauge = ""
+            elif gauge_style == "blocks":
+                gauge = get_utilization_gauge_blocks(utilization, 1.0, gauge_width)
+            else:
+                gauge = get_utilization_gauge_vertical(utilization, 1.0)
+            gauge_part = f"{gauge}\u00a0" if gauge else ""
+
+            color = get_usage_color(1.0)  # neutral green
+            results["usage_extra"] = (
+                f"   {gauge_part}{color}{used_pct_extra}\u00a0%\u00a0{money_str}"
+            )
+        else:
+            results["usage_extra"] = ""
+    else:
+        results["usage_extra"] = ""
+
     # Ensure burndown keys exist
     if "weekly_burndown" not in results:
         results["weekly_burndown"] = ""
@@ -1586,6 +1624,10 @@ def _render_usage_weekly(ctx, opts):
     return ctx.get("usage_weekly", "")
 
 
+def _render_usage_extra(ctx, opts):
+    return ctx.get("usage_extra", "")
+
+
 def _render_usage_burndown(ctx, opts):
     burndown = ctx.get("usage_weekly_burndown", "")
     if not burndown:
@@ -1640,6 +1682,7 @@ SEGMENT_RENDERERS = {
     "git_status": _render_git_status,
     "usage_5hour": _render_usage_5hour,
     "usage_weekly": _render_usage_weekly,
+    "usage_extra": _render_usage_extra,
     "usage_burndown": _render_usage_burndown,
     "update": _render_update,
     "context_na_message": _render_context_na_message,
@@ -1679,6 +1722,7 @@ def build_progress_bar(
     calc_pct=None,
     usage_5hour="",
     usage_weekly="",
+    usage_extra="",
     usage_weekly_burndown="",
     usage_weekly_burndown_color="",
     update_info=None,
@@ -1769,6 +1813,7 @@ def build_progress_bar(
         "cwd": cwd,
         "usage_5hour": usage_5hour,
         "usage_weekly": usage_weekly,
+        "usage_extra": usage_extra,
         "usage_weekly_burndown": usage_weekly_burndown,
         "usage_weekly_burndown_color": usage_weekly_burndown_color,
         "update_info": update_info,
@@ -2304,6 +2349,7 @@ def main():
             calc_pct,
             usage_5hour=usage_parts["usage_5hour"],
             usage_weekly=usage_parts["usage_weekly"],
+            usage_extra=usage_parts.get("usage_extra", ""),
             usage_weekly_burndown=usage_parts.get("weekly_burndown", ""),
             usage_weekly_burndown_color=usage_parts.get("weekly_burndown_color", ""),
             update_info=update_info,
