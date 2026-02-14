@@ -11,9 +11,9 @@ fish_add_path "/mnt/c/Users/bronze/AppData/Local/Programs/Microsoft VS Code/bin"
 # ── volta: JavaScript toolchain manager ───────────────────────────────────────
 # Docs: https://volta.sh/ | Repo: https://github.com/volta-cli/volta
 set -gx VOLTA_HOME "$HOME/.volta"
-fish_add_path "$VOLTA_HOME/bin"
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.console-ninja/.bin
+fish_add_path "$VOLTA_HOME/bin"
 
 # THEME
 # ── oh-my-posh: prompt theming ────────────────────────────────────────────────

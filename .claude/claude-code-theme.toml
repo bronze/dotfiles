@@ -1,0 +1,33 @@
+# ~/.claude/claude-code-theme.toml
+# Nord dark mode theme
+
+# Model badges [bg, fg]
+model_sonnet = ["#A3BE8C", "#2E3440"]
+model_opus   = ["#B48EAD", "#2E3440"]
+model_haiku  = ["#4C566A", "#ECEFF4"]
+
+# Progress bar empty fill
+bar_empty = "#3B4252"
+
+# Text colors
+text_cwd = "#88C0D0"
+text_git = "#81A1C1"
+
+# Usage gauge colors
+usage_green  = "#A3BE8C"
+usage_yellow = "#EBCB8B"
+usage_red    = "#BF616A"
+
+# Progress bar gradient
+gradient = [
+    {threshold = 10,  color = "#2B3B2B"},
+    {threshold = 20,  color = "#334433"},
+    {threshold = 30,  color = "#3D5240"},
+    {threshold = 40,  color = "#4A6348"},
+    {threshold = 50,  color = "#5A7A55"},
+    {threshold = 60,  color = "#7A8A4A"},
+    {threshold = 70,  color = "#9A8A3A"},
+    {threshold = 80,  color = "#B8783A"},
+    {threshold = 90,  color = "#BF616A"},
+    {threshold = 101, color = "#BF616A"},
+]
