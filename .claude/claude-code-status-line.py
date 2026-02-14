@@ -1181,6 +1181,76 @@ def get_usage_gauge_blocks(ratio, gauge_width=4):
     return "".join(parts) + RESET
 
 
+def get_utilization_gauge_vertical(utilization_pct, ratio):
+    """Vertical gauge filling from bottom based on utilization.
+    Color based on pace ratio: green if on track, yellow/red if burning fast.
+    """
+    theme = THEMES[THEME]
+    gauges = "▁▂▃▄▅▆▇█"
+
+    if ratio >= 1 / 0.75:
+        fill_rgb, fill_fb = theme["usage_light"]
+    elif ratio >= 1.0:
+        fill_rgb, fill_fb = theme["usage_green"]
+    elif ratio >= 0.75:
+        fill_rgb, fill_fb = theme["usage_yellow"]
+    else:
+        fill_rgb, fill_fb = theme["usage_red"]
+
+    empty_rgb, empty_fb = theme["bar_empty"]
+    fraction = utilization_pct / 100.0
+    index = int(fraction * 7.99)
+    index = max(0, min(7, index))
+
+    if index == 0 and utilization_pct > 0:
+        char = gauges[0]
+    elif index == 0:
+        char = " "
+    else:
+        char = gauges[index]
+
+    bg = _color(empty_rgb, empty_fb, is_bg=True)
+    fg = _color(fill_rgb, fill_fb, is_bg=False)
+    return f"{bg}{fg}{char}{RESET}"
+
+
+def get_utilization_gauge_blocks(utilization_pct, ratio, gauge_width=4):
+    """Horizontal gauge filling left-to-right based on utilization.
+    Color based on pace ratio: green if on track, yellow/red if burning fast.
+    """
+    theme = THEMES[THEME]
+    BLOCKS = " ▏▎▍▌▋▊▉█"
+    empty_rgb, empty_fb = theme["bar_empty"]
+
+    if ratio >= 1 / 0.75:
+        fill_rgb, fill_fb = theme["usage_light"]
+    elif ratio >= 1.0:
+        fill_rgb, fill_fb = theme["usage_green"]
+    elif ratio >= 0.75:
+        fill_rgb, fill_fb = theme["usage_yellow"]
+    else:
+        fill_rgb, fill_fb = theme["usage_red"]
+
+    empty_bg = _color(empty_rgb, empty_fb, is_bg=True)
+    fill_fg = _color(fill_rgb, fill_fb, is_bg=False)
+
+    fraction = utilization_pct / 100.0
+    total = round(fraction * gauge_width * 8)
+    filled = total // 8
+    partial = total % 8
+    empty = gauge_width - filled - (1 if partial > 0 else 0)
+
+    parts = []
+    if filled > 0:
+        parts.append(f"{fill_fg}{'█' * filled}")
+    if partial > 0:
+        parts.append(f"{empty_bg}{fill_fg}{BLOCKS[partial]}")
+    if empty > 0:
+        parts.append(f"{empty_bg}{' ' * empty}")
+
+    return "".join(parts) + RESET
+
+
 def _format_duration(seconds):
     """Round and format a duration for burndown display.
 
@@ -1316,6 +1386,7 @@ def format_usage_indicators(usage_data):
             continue
 
         now = datetime.now(timezone.utc)
+        used_pct = max(0, int(utilization_pct))
         remaining_pct = max(0, int(100 - utilization_pct))
         reset_label = reset_dt.astimezone().strftime(time_fmt)
 
@@ -1384,12 +1455,12 @@ def format_usage_indicators(usage_data):
         if gauge_style == "none":
             gauge = ""
         elif gauge_style == "blocks":
-            gauge = get_usage_gauge_blocks(ratio, gauge_width)
+            gauge = get_utilization_gauge_blocks(utilization_pct, ratio, gauge_width)
         else:
-            gauge = get_usage_gauge(ratio)
+            gauge = get_utilization_gauge_vertical(utilization_pct, ratio)
         gauge_part = f"{gauge}\u00a0" if gauge else ""
         results[segment_name] = (
-            f"   {gauge_part}{color}{remaining_pct}\u00a0%\u00a0→\u00a0{reset_label}"
+            f"   {gauge_part}{color}{used_pct}\u00a0%\u00a0→\u00a0{reset_label}"
         )
 
     for seg in ("usage_5hour", "usage_weekly"):
