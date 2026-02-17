@@ -168,6 +168,13 @@ source-env (oh-my-posh init nu | save -f ~/.omp.nu)
 
 ---
 
+## Commands
+
+Delete all node modules folders in the current directory and subdirectories:
+`find . -name node_modules -type d -prune -exec rm -rf '{}' +`
+
+---
+
 ## 📚 References
 
 - [Dreams of Autonomy: This Zsh config is perhaps my favorite one yet.](https://youtu.be/ud7YxC33Z3w)
