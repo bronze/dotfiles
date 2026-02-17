@@ -86,7 +86,8 @@ source <(carapace _carapace)
 # ── Custom commands ──────────────────────────────────────────────────────────
 alias coding="cd ~/coding/"
 alias dotfiles="cd '/home/bronze/dotfiles'"
-alias obsidian="cd '/mnt/c/Users/bronze/Dropbox/Obsidian/Bronze Obsidian'"
+# alias obsidian="cd '/mnt/c/Users/bronze/Dropbox/Obsidian/Bronze Obsidian'"
+alias obsidian="cd '/mnt/c/Users/bronze/Documents/bronze-personal'"
 alias 720="yt-dlp -f 'best[height=720]' "
 
 ##### THEME
