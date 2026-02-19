@@ -24,7 +24,6 @@ Latest version: https://github.com/benabraham/claude-code-status-line
 """
 
 import json
-import locale
 import os
 import re
 import select
@@ -36,7 +35,19 @@ import time
 import tty
 from datetime import datetime, timezone
 
-VERSION = "4.7.0"
+VERSION = "4.10.0"
+
+# =============================================================================
+# CUSTOMIZATIONS (grep [CUSTOM] to find all change points for future merges)
+# =============================================================================
+# 1. SEGMENT_DEFAULTS: progress_bar width=8, git_branch hide_default=0,
+#    usage_5hour/usage_weekly gauge=vertical
+# 2. get_utilization_gauge_vertical(): fills by utilization%, colors by ratio
+# 3. get_utilization_gauge_blocks(): same, horizontal
+# 4. format_usage_indicators(): uses utilization gauges + shows used% not remaining%
+# 5. _render_git_branch(): ⎇ icon instead of [brackets]
+# 6. _render_directory(): abbreviates intermediate dirs (~/d/s/dotfiles style)
+# =============================================================================
 
 # =============================================================================
 # CONFIGURATION — override any setting via environment variables (SL_ prefix)
@@ -71,18 +82,19 @@ THEME_FILE = _env_str(
 # --- Segment system ---
 
 DEFAULT_SEGMENTS = (
-    "update model context_na_message progress_bar percentage tokens directory git_branch git_status usage_5hour usage_weekly usage_extra"
+    "update model context_na_message progress_bar percentage tokens directory added_dirs git_branch git_status usage_5hour usage_weekly"
 )
 VALID_SEGMENTS = frozenset(DEFAULT_SEGMENTS.split() + ["new_line", "usage_burndown"])
 
 SEGMENT_DEFAULTS = {
-    "progress_bar": {"width": "8"},
-    "git_branch": {"hide_default": "0"},
+    "progress_bar": {"width": "8"},           # [CUSTOM] upstream default: "12"
+    "directory": {"basename_only": "0"},
+    "added_dirs": {"basename_only": "0", "separator": " • "},
+    "git_branch": {"hide_default": "0"},      # [CUSTOM] upstream default: "1"
     "percentage": {"fallback": "0"},
     "tokens": {"fallback": "0"},
-    "usage_5hour": {"gauge": "vertical", "width": "4"},
-    "usage_weekly": {"gauge": "vertical", "width": "4"},
-    "usage_extra": {"gauge": "vertical", "width": "4"},
+    "usage_5hour": {"gauge": "vertical", "width": "4"},   # [CUSTOM] upstream default: "blocks"
+    "usage_weekly": {"gauge": "vertical", "width": "4"},  # [CUSTOM] upstream default: "blocks"
     "usage_burndown": {"coeff": "1.4"},
 }
 
@@ -187,31 +199,32 @@ THEMES = {
         "model_haiku": (("#4C566A", 60), ("#ECEFF4", 255)),  # nord3 bg, nord6 fg
         "model_default": (("#D8DEE9", 253), ("#2E3440", 236)),  # nord4 bg, nord0 fg
         # Unused portion of progress bar
-        "bar_empty": ("#242933", 234),  # deep polar night
+        "bar_empty": ("#292c33", 234),  # darker than nord0
         # Text colors (Nord)
         "text_percent": (("#5E81AC", None), 67),  # nord10
         "text_numbers": (("#5E81AC", None), 67),  # nord10
         "text_cwd": (("#81A1C1", None), 110),  # nord9
         "text_git": (("#B48EAD", None), 139),  # nord15 purple
         "text_na": (("#D08770", None), 173),  # nord12 orange
+        "text_added_dirs": (("#4C566A", None), 60),  # nord3 muted gray
         # Usage indicator colors (ratio-based)
         "usage_light": ("#88C0D0", 110),  # nord8 frost - well ahead
         "usage_green": ("#A3BE8C", 108),  # nord14 - on track
         "usage_yellow": ("#EBCB8B", 222),  # nord13 - using faster
         "usage_red": ("#BF616A", 131),  # nord11 - burning through
-        # Progress bar gradient: frost → aurora (Nord palette)
+        # Progress bar gradient: (threshold, (hex, fallback_256))
         # Threshold means "use this color if pct < threshold"
         "gradient": [
-            (10, ("#2B3E50", 24)),   # 0-9%   dark frost (nord10-derived)
-            (20, ("#2E4856", 24)),   # 10-19% frost teal
-            (30, ("#2F5350", 30)),   # 20-29% dark nord7 teal
-            (40, ("#3A5E45", 29)),   # 30-39% nord7 → nord14 transition
-            (50, ("#4E6842", 65)),   # 40-49% dark nord14 green
-            (60, ("#696A3A", 100)),  # 50-59% nord14 → nord13 transition
-            (70, ("#8A7838", 136)),  # 60-69% dark nord13 yellow
-            (80, ("#A56638", 130)),  # 70-79% dark nord12 orange
-            (90, ("#A84C4C", 131)),  # 80-89% nord12 → nord11 transition
-            (101, ("#BF616A", 131)), # 90-100% nord11 red
+            (10, ("#183522", 22)),  # 0-9%   dark green
+            (20, ("#153E21", 22)),  # 10-19%
+            (30, ("#104620", 28)),  # 20-29%
+            (40, ("#0B4E1C", 28)),  # 30-39%
+            (50, ("#065716", 34)),  # 40-49% bright green
+            (60, ("#2E5900", 106)),  # 50-59% yellow-green
+            (70, ("#5D4F00", 136)),  # 60-69% olive
+            (80, ("#833A00", 166)),  # 70-79% orange
+            (90, ("#A10700", 160)),  # 80-89% red-orange
+            (101, ("#B30000", 196)),  # 90-100% red
         ],
     },
     "light": {
@@ -231,6 +244,7 @@ THEMES = {
         "text_cwd": (("#3C465A", None), 238),  # dark slate
         "text_git": (("#508C50", None), 65),  # muted green
         "text_na": (("#D08770", None), 173),  # nord12 orange
+        "text_added_dirs": (("#7B8394", None), 103),  # medium gray
         # Usage indicator colors (ratio-based) - darker for light bg
         "usage_light": ("#2B7A78", 30),  # dark teal - well ahead
         "usage_green": ("#4A7C4A", 65),  # dark green - on track
@@ -331,7 +345,7 @@ def _load_custom_theme():
             overrides[key] = (h, hex_to_256(h))
 
     # Text colors: "hex" → (("hex", None), 256)
-    for key in ("text_percent", "text_numbers", "text_cwd", "text_git", "text_na"):
+    for key in ("text_percent", "text_numbers", "text_cwd", "text_git", "text_na", "text_added_dirs"):
         if key in ns:
             h = ns[key]
             if not _is_hex(h):
@@ -1183,7 +1197,7 @@ def get_usage_gauge_blocks(ratio, gauge_width=4):
     return "".join(parts) + RESET
 
 
-def get_utilization_gauge_vertical(utilization_pct, ratio):
+def get_utilization_gauge_vertical(utilization_pct, ratio):  # [CUSTOM] fills by utilization%, not pace ratio
     """Vertical gauge filling from bottom based on utilization.
     Color based on pace ratio: green if on track, yellow/red if burning fast.
     """
@@ -1216,7 +1230,7 @@ def get_utilization_gauge_vertical(utilization_pct, ratio):
     return f"{bg}{fg}{char}{RESET}"
 
 
-def get_utilization_gauge_blocks(utilization_pct, ratio, gauge_width=4):
+def get_utilization_gauge_blocks(utilization_pct, ratio, gauge_width=4):  # [CUSTOM] fills by utilization%, not pace ratio
     """Horizontal gauge filling left-to-right based on utilization.
     Color based on pace ratio: green if on track, yellow/red if burning fast.
     """
@@ -1388,7 +1402,7 @@ def format_usage_indicators(usage_data):
             continue
 
         now = datetime.now(timezone.utc)
-        used_pct = max(0, int(utilization_pct))
+        used_pct = max(0, int(utilization_pct))       # [CUSTOM] added; upstream only has remaining_pct
         remaining_pct = max(0, int(100 - utilization_pct))
         reset_label = reset_dt.astimezone().strftime(time_fmt)
 
@@ -1419,10 +1433,24 @@ def format_usage_indicators(usage_data):
 
         # Calculate burndown for yellow/red zone (ratio < 1.0)
         if api_key == "seven_day" and ratio < 1.0 and elapsed_seconds > 0 and utilization_pct > 0:
-            burn_rate = utilization_pct / elapsed_seconds
+            # Bayesian shrinkage: blend observed rate toward on-track rate.
+            # Hyperbolic trust curve: f = elapsed / (k + elapsed)
+            # k = half-trust point — at k elapsed, 50/50 blend.
+            burndown_opts = _segment_opts("usage_burndown")
+            try:
+                halftrust_h = float(burndown_opts.get("halftrust", "16"))
+            except (ValueError, TypeError):
+                halftrust_h = 16
+            k = halftrust_h * 3600
+            f = elapsed_seconds / (k + elapsed_seconds)
+
+            observed_rate = utilization_pct / elapsed_seconds
+            on_track_rate = 100 / window_seconds
+            effective_rate = observed_rate * f + on_track_rate * (1 - f)
+
             remaining_budget = 100 - utilization_pct
-            if burn_rate > 0:
-                seconds_to_depletion = remaining_budget / burn_rate
+            if effective_rate > on_track_rate:
+                seconds_to_depletion = remaining_budget / effective_rate
                 # Time until window resets
                 seconds_until_reset = reset_dt.timestamp() - now.timestamp()
                 # How much earlier will we run out?
@@ -1431,7 +1459,6 @@ def format_usage_indicators(usage_data):
                     # Non-linear relevance filter: require larger "sooner" gap
                     # early in the window when prediction confidence is low.
                     # Power curve: days_remaining^coeff hours minimum.
-                    burndown_opts = _segment_opts("usage_burndown")
                     try:
                         coeff = float(burndown_opts.get("coeff", "1.4"))
                     except (ValueError, TypeError):
@@ -1457,53 +1484,17 @@ def format_usage_indicators(usage_data):
         if gauge_style == "none":
             gauge = ""
         elif gauge_style == "blocks":
-            gauge = get_utilization_gauge_blocks(utilization_pct, ratio, gauge_width)
+            gauge = get_utilization_gauge_blocks(utilization_pct, ratio, gauge_width)  # [CUSTOM] upstream: get_usage_gauge_blocks(ratio, ...)
         else:
-            gauge = get_utilization_gauge_vertical(utilization_pct, ratio)
+            gauge = get_utilization_gauge_vertical(utilization_pct, ratio)             # [CUSTOM] upstream: get_usage_gauge(ratio)
         gauge_part = f"{gauge}\u00a0" if gauge else ""
         results[segment_name] = (
-            f"   {gauge_part}{color}{used_pct}\u00a0%\u00a0→\u00a0{reset_label}"
+            f"   {gauge_part}{color}{used_pct}\u00a0%\u00a0→\u00a0{reset_label}"      # [CUSTOM] upstream: remaining_pct
         )
 
     for seg in ("usage_5hour", "usage_weekly"):
         if seg not in results:
             results[seg] = ""
-
-    # Extra usage segment
-    if _has_segment("usage_extra"):
-        extra = usage_data.get("extra_usage") if usage_data else None
-        if extra and extra.get("is_enabled") and extra.get("used_credits") is not None:
-            utilization = extra.get("utilization", 0)
-            used_pct_extra = max(0, int(utilization))
-            used_credits = extra["used_credits"] / 100.0  # cents to currency units
-
-            # Format money using locale
-            try:
-                locale.setlocale(locale.LC_ALL, "")
-                money_str = locale.currency(used_credits, grouping=True)
-            except (locale.Error, ValueError):
-                money_str = f"${used_credits:.2f}"
-
-            opts = _segment_opts("usage_extra")
-            gauge_style = opts.get("gauge", "blocks")
-            gauge_width = int(opts.get("width", "4"))
-            # No pace concept for extra usage — always neutral (ratio=1.0)
-            if gauge_style == "none":
-                gauge = ""
-            elif gauge_style == "blocks":
-                gauge = get_utilization_gauge_blocks(utilization, 1.0, gauge_width)
-            else:
-                gauge = get_utilization_gauge_vertical(utilization, 1.0)
-            gauge_part = f"{gauge}\u00a0" if gauge else ""
-
-            color = get_usage_color(1.0)  # neutral green
-            results["usage_extra"] = (
-                f"   {gauge_part}{color}{used_pct_extra}\u00a0%\u00a0{money_str}"
-            )
-        else:
-            results["usage_extra"] = ""
-    else:
-        results["usage_extra"] = ""
 
     # Ensure burndown keys exist
     if "weekly_burndown" not in results:
@@ -1552,17 +1543,39 @@ def _render_directory(ctx, opts):
     cwd = ctx.get("cwd")
     if not cwd:
         return ""
-    home = os.path.expanduser("~")
-    if cwd.startswith(home):
-        cwd_short = "~" + cwd[len(home) :]
+    if opts.get("basename_only") == "1":
+        cwd_short = os.path.basename(cwd) or cwd
     else:
-        cwd_short = cwd
-    # Abbreviate intermediate dirs to first char, keep last component full
-    parts = cwd_short.split("/")
-    if len(parts) > 2:
-        abbreviated = [parts[0]] + [p[0] if p else "" for p in parts[1:-1]] + [parts[-1]]
-        cwd_short = "/".join(abbreviated)
+        home = os.path.expanduser("~")
+        if cwd.startswith(home):
+            cwd_short = "~" + cwd[len(home) :]
+        else:
+            cwd_short = cwd
+        # Abbreviate intermediate dirs to first char, keep last component full  # [CUSTOM] upstream shows full path
+        parts = cwd_short.split("/")
+        if len(parts) > 2:
+            abbreviated = [parts[0]] + [p[0] if p else "" for p in parts[1:-1]] + [parts[-1]]
+            cwd_short = "/".join(abbreviated)
     return f"   {text_color('cwd')}{cwd_short}"
+
+
+def _render_added_dirs(ctx, opts):
+    added_dirs = ctx.get("added_dirs", [])
+    if not added_dirs:
+        return ""
+    home = os.path.expanduser("~")
+    basename_only = opts.get("basename_only") == "1"
+    shortened = []
+    for d in sorted(added_dirs):
+        if basename_only:
+            shortened.append(os.path.basename(d) or d)
+        elif d.startswith(home):
+            shortened.append("~" + d[len(home):])
+        else:
+            shortened.append(d)
+    separator = opts.get("separator", " • ")
+    joined = separator.join(shortened)
+    return f"   {text_color('added_dirs')}{joined}"
 
 
 def _render_git_branch(ctx, opts):
@@ -1574,7 +1587,7 @@ def _render_git_branch(ctx, opts):
         return ""
     if opts.get("hide_default") == "1" and git_branch in ("main", "master"):
         return ""
-    return f"   {BOLD}{text_color('git')}\u2387 {git_branch}"
+    return f"   {BOLD}{text_color('git')}\u2387 {git_branch}"  # [CUSTOM] upstream: [branch]
 
 
 def _render_git_status(ctx, opts):
@@ -1622,10 +1635,6 @@ def _render_usage_5hour(ctx, opts):
 
 def _render_usage_weekly(ctx, opts):
     return ctx.get("usage_weekly", "")
-
-
-def _render_usage_extra(ctx, opts):
-    return ctx.get("usage_extra", "")
 
 
 def _render_usage_burndown(ctx, opts):
@@ -1678,11 +1687,11 @@ SEGMENT_RENDERERS = {
     "percentage": _render_percentage,
     "tokens": _render_tokens,
     "directory": _render_directory,
+    "added_dirs": _render_added_dirs,
     "git_branch": _render_git_branch,
     "git_status": _render_git_status,
     "usage_5hour": _render_usage_5hour,
     "usage_weekly": _render_usage_weekly,
-    "usage_extra": _render_usage_extra,
     "usage_burndown": _render_usage_burndown,
     "update": _render_update,
     "context_na_message": _render_context_na_message,
@@ -1722,10 +1731,10 @@ def build_progress_bar(
     calc_pct=None,
     usage_5hour="",
     usage_weekly="",
-    usage_extra="",
     usage_weekly_burndown="",
     usage_weekly_burndown_color="",
     update_info=None,
+    added_dirs=None,
 ):
     """Build the full status line string"""
     bar_width = max(1, min(128, int(_segment_opts("progress_bar").get("width", "12"))))
@@ -1813,10 +1822,10 @@ def build_progress_bar(
         "cwd": cwd,
         "usage_5hour": usage_5hour,
         "usage_weekly": usage_weekly,
-        "usage_extra": usage_extra,
         "usage_weekly_burndown": usage_weekly_burndown,
         "usage_weekly_burndown_color": usage_weekly_burndown_color,
         "update_info": update_info,
+        "added_dirs": added_dirs or [],
     }
 
     parts = []
@@ -1831,12 +1840,13 @@ def build_progress_bar(
     return _join_parts(parts)
 
 
-def build_na_line(model, cwd):
+def build_na_line(model, cwd, added_dirs=None):
     """Build status line when no usage data available"""
     ctx = {
         "model": model,
         "model_color": get_model_colors(model),
         "cwd": cwd,
+        "added_dirs": added_dirs or [],
         "na_mode": True,  # Signals not_available_message to render
     }
 
@@ -2294,6 +2304,7 @@ def main():
 
     model = data.get("model", {}).get("display_name", "Claude")
     cwd = data.get("cwd", "")
+    added_dirs = data.get("workspace", {}).get("added_dirs", [])
 
     # Get context window info
     context_window = data.get("context_window", {})
@@ -2324,7 +2335,7 @@ def main():
     elif calc_pct is not None:
         pct = calc_pct
     else:
-        print(build_na_line(model, cwd))
+        print(build_na_line(model, cwd, added_dirs=added_dirs))
         return
 
     # Get transcript tokens for comparison
@@ -2349,10 +2360,10 @@ def main():
             calc_pct,
             usage_5hour=usage_parts["usage_5hour"],
             usage_weekly=usage_parts["usage_weekly"],
-            usage_extra=usage_parts.get("usage_extra", ""),
             usage_weekly_burndown=usage_parts.get("weekly_burndown", ""),
             usage_weekly_burndown_color=usage_parts.get("weekly_burndown_color", ""),
             update_info=update_info,
+            added_dirs=added_dirs,
         )
     )
 
