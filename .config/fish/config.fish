@@ -4,6 +4,7 @@ set fish_greeting
 # Add Homebrew binaries to PATH (required for oh-my-posh and other tools)
 # this comes BEFORE oh-my-posh
 fish_add_path /home/linuxbrew/.linuxbrew/bin
+fish_add_path /home/linuxbrew/.linuxbrew/sbin
 
 # Detect VSCode on Windows
 fish_add_path "/mnt/c/Users/bronze/AppData/Local/Programs/Microsoft VS Code/bin"

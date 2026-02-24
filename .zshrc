@@ -10,6 +10,7 @@ compinit
 # Docs: https://brew.sh/
 if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  export PATH="/home/linuxbrew/.linuxbrew/sbin:$PATH"
 fi
 
 # ── VS Code: editor on Windows WSL ────────────────────────────────────────────
