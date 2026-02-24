@@ -59,4 +59,6 @@ alias dotfiles="cd '/home/bronze/dotfiles'"
 # alias obsidian="cd '/mnt/c/Users/bronze/Dropbox/Obsidian/Bronze Obsidian'"
 alias obsidian="cd '/mnt/c/Users/bronze/Documents/bronze-personal'"
 # abbr --add obs "cd '/mnt/c/Users/bronze/Dropbox/Obsidian/Bronze Obsidian'"
-alias ls="eza --icons --grid --group-directories-first"
+if test "$CLAUDECODE" != "1"
+    alias ls="eza --icons --grid --group-directories-first"
+end
