@@ -196,4 +196,8 @@ A cross-platform dotfile management system using GNU Stow for simple, symlink-ba
 
 - [Dotfiles Setup](https://github.com/ugudlado/shell)
 
-_Last updated 2026-02-17_
+```
+sudo apt update && sudo apt full-upgrade
+```
+
+_Last updated 2026-02-24_
