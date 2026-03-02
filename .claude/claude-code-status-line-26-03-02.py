@@ -458,12 +458,11 @@ def get_colors_for_percentage(pct):
 def get_model_colors(model):
     """Return (bg_code, fg_code) for model badge"""
     theme = THEMES[THEME]
-    model_lower = model.lower()
-    if "sonnet" in model_lower:
+    if "Sonnet" in model:
         key = "model_sonnet"
-    elif "opus" in model_lower:
+    elif "Opus" in model:
         key = "model_opus"
-    elif "haiku" in model_lower:
+    elif "Haiku" in model:
         key = "model_haiku"
     else:
         key = "model_default"
@@ -1509,7 +1508,7 @@ def format_usage_indicators(usage_data):
     if _has_segment("usage_extra"):
         extra = usage_data.get("extra_usage") if usage_data else None
         if extra and extra.get("is_enabled") and extra.get("used_credits") is not None:
-            utilization = extra.get("utilization") or 0
+            utilization = extra.get("utilization", 0)
             used_pct_extra = max(0, int(utilization))
             used_credits = extra["used_credits"] / 100.0  # cents to currency units
             try:
@@ -2343,8 +2342,7 @@ def main():
         print("statusline: invalid JSON input", file=sys.stderr)
         return
 
-    _model = data.get("model", {})
-    model = _model.get("display_name", "Claude") if isinstance(_model, dict) else _model or "Claude"
+    model = data.get("model", {}).get("display_name", "Claude")
     cwd = data.get("cwd", "")
     added_dirs = data.get("workspace", {}).get("added_dirs", [])
 
