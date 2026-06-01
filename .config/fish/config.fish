@@ -57,6 +57,7 @@ end
 # Shortcuts
 alias coding="cd ~/coding/"
 alias dotfiles="cd '/home/bronze/dotfiles'"
+alias sparkle="cd '/mnt/c/Users/bronze/Dropbox/Sparkle/knowledgebase' && claude"
 # alias obsidian="cd '/mnt/c/Users/bronze/Dropbox/Obsidian/Bronze Obsidian'"
 alias obsidian="cd '/mnt/c/Users/bronze/Documents/bronze-personal'"
 # abbr --add obs "cd '/mnt/c/Users/bronze/Dropbox/Obsidian/Bronze Obsidian'"
