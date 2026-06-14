@@ -7,7 +7,7 @@ Personal configuration files for my development environment, managed with **GNU 
 Install the required tools:
 
 ```bash
-brew install nushell fish oh-my-posh zoxide fzf atuin eza carapace gh python yt-dlp
+brew install nushell fish oh-my-posh zoxide fzf atuin eza carapace gh python yt-dlp pipx
 ```
 
 For Linux:
@@ -32,6 +32,15 @@ sudo apt-get update && sudo apt-get install poppler-utils
 - `eza` - A modern alternative to ls
 - `carapace` - A multi-shell completion manager
 - `gh` - GitHub’s official command line tool
+- `pipx` - Install Python CLI tools in isolated environments
+
+## 🐍 Python CLI Tools (pipx)
+
+```bash
+pipx install markitdown
+```
+
+- `markitdown` - Convert files (PDF, DOCX, PPTX, HTML, images) to Markdown
 
 Nerd Fonts:
 
