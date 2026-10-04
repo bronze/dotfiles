@@ -25,6 +25,9 @@ oh-my-posh init fish --config ~/.poshthemes/jandedobbeleer4.nord.json | source
 # ── zoxide: smarter cd command ────────────────────────────────────────────────
 # Docs: https://github.com/ajeetdsouza/zoxide
 if test "$CLAUDECODE" != "1"
+    # fish 4.x embeds cd.fish in the binary; zoxide reads it from disk and fails.
+    # Pre-define the copy it needs so it skips that step.
+    functions --query __zoxide_cd_internal; or functions --copy cd __zoxide_cd_internal
     zoxide init fish --cmd cd | source
     set -x _ZO_ECHO 1  # Echo target directory before jumping
 end
