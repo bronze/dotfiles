@@ -16,6 +16,10 @@ fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.console-ninja/.bin
 fish_add_path "$VOLTA_HOME/bin"
 
+# ── bun: JavaScript runtime (also used by the claude-mem plugin) ──────────────
+# Docs: https://bun.sh/
+fish_add_path $HOME/.bun/bin
+
 # THEME
 # ── oh-my-posh: prompt theming ────────────────────────────────────────────────
 # Docs: https://ohmyposh.dev/ | Repo: https://github.com/jandedobbeleer/oh-my-posh
